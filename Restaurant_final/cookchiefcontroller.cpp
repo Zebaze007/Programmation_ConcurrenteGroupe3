@@ -1,19 +1,18 @@
-#include "cookchiefcontroller.h"
-
+#include "CookChiefController.h"
 #include <iostream>
 
-void CookChiefController::giveTasks() {
+void CookChief::giveTasks() {
     std::cout << "CookChief is assigning tasks to cookers." << std::endl;
 }
 
-void CookChiefController::divideTasks(const std::string& task) {
+void CookChief::divideTasks(const std::string& task) {
     std::cout << "CookChief is dividing task: " << task << std::endl;
 }
 
-void CookChiefController::updateStock() {
+void CookChief::updateStock() {
     std::cout << "CookChief is updating the stock." << std::endl;
 }
 
-void CookChiefController::createStock() {
+void CookChief::createStock() {
     std::cout << "CookChief is creating new stock." << std::endl;
 }

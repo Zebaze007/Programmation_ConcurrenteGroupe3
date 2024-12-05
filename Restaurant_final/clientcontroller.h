@@ -1,4 +1,3 @@
-// clientcontroller.h
 #ifndef CLIENTCONTROLLER_H
 #define CLIENTCONTROLLER_H
 

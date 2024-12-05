@@ -1,14 +1,23 @@
 #ifndef COOKER_H
 #define COOKER_H
 
-#include "Command.h"
+#include <QGraphicsPixmapItem>
+#include <QObject>
 
-class Cooker {
+class Cooker : public QObject {
+    Q_OBJECT
+
 public:
-    void prepareStep();
-    void depositCommand(Command* command);
-    void takeIngredient();
-    void run();
+    Cooker(const QString &imagePath, int id, QObject *parent = nullptr);
+    ~Cooker();
+
+    void setPosition(int x, int y, double scale);
+    QGraphicsPixmapItem* getGraphicsItem() const;
+    int getId() const;
+
+private:
+    QGraphicsPixmapItem *graphicsItem;
+    int id;
 };
 
 #endif // COOKER_H

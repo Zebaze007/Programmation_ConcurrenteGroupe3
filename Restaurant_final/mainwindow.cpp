@@ -76,11 +76,13 @@ MainWindow::MainWindow(QWidget *parent)
     sceneKitchenArea->addItem(dishwasher->getGraphicsItem());
     dishwasher->setPosition(550, 500, 100.0);
 
+    sceneKitchenArea->addItem(cookChief->getGraphicsItem());
+    cookChief->setPosition(80, 300, 50.0);
+
     sceneKitchenArea->addItem(stove->getGraphicsItem());
     stove->setPosition(550, 400, 100.0);
 
-    sceneKitchenArea->addItem(cookChief->getGraphicsItem());
-    cookChief->setPosition(80, 300, 50.0);
+
 
 
     // Connectez les boutons aux slots

@@ -9,8 +9,7 @@
 
 #include "cleaner.h"
 #include "command.h"
-#include "cooker.h"
-#include "counter.h"
+
 #include "dish.h"
 #include "managetools.h"
 #include "materials.h"
@@ -18,11 +17,11 @@
 #include "washer.h"
 #include "tablecontroller.h"
 #include "clientcontroller.h"
-#include "countercontroller.h"
+#include "counter.h"
 #include "washingmachinecontroller.h"
 #include "dishwashercontroller.h"
 #include "stovecontroller.h"
-#include "cookchiefcontroller.h"
+#include "cookchief.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -69,6 +68,8 @@ private:
     Dishwasher *dishwasher;            // Lave-vaisselle
     Stove *stove;                      // four
     CookChief *cookChief;              //chef cuisto
+
+
 
     // Gestion du temps
     QTimer *timer;                     // Timer pour le suivi du temps

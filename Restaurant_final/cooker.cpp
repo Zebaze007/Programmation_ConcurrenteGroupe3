@@ -1,18 +1,30 @@
-#include "Cooker.h"
-#include <iostream>
+#include "cooker.h"
 
-void Cooker::prepareStep() {
-    std::cout << "Cooker is preparing a step of the recipe..." << std::endl;
+Cooker::Cooker(const QString &imagePath, int id, QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id)
+{
+    graphicsItem->setZValue(1); // Permet de gérer la superposition des sprites
 }
 
-void Cooker::depositCommand(Command* command) {
-    std::cout << "Cooker is depositing a completed command." << std::endl;
+Cooker::~Cooker()
+{
+    delete graphicsItem;
 }
 
-void Cooker::takeIngredient() {
-    std::cout << "Cooker is taking an ingredient." << std::endl;
+void Cooker::setPosition(int x, int y, double scale)
+{
+    if (graphicsItem) {
+        graphicsItem->setPos(x, y);
+        graphicsItem->setScale(scale / 100.0);
+    }
 }
 
-void Cooker::run() {
-    std::cout << "Cooker is running the recipe process." << std::endl;
+QGraphicsPixmapItem* Cooker::getGraphicsItem() const
+{
+    return graphicsItem;
+}
+
+int Cooker::getId() const
+{
+    return id;
 }

@@ -1,12 +1,11 @@
-#ifndef COOKCHIEFCONTROLLER_H
-#define COOKCHIEFCONTROLLER_H
+#ifndef COOKCHIEF_H
+#define COOKCHIEF_H
 
 #include <string>
 #include "Menu.h"
 #include "countercontroller.h"
-#include "cookchief.h"
 
-    class CookChiefController {
+class CookChief {
 private:
     Menu menu;
     Counter* dishCounter;
