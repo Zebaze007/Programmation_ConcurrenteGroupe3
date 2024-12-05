@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     Dish.cpp \
+    chair.cpp \
+    chaircontroller.cpp \
     client.cpp \
     clientcontroller.cpp \
     command.cpp \
@@ -35,6 +37,8 @@ SOURCES += \
     washingmachinecontroller.cpp
 
 HEADERS += \
+    chair.h \
+    chaircontroller.h \
     cleaner.h \
     client.h \
     clientcontroller.h \

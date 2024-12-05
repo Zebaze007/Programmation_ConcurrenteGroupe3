@@ -25,6 +25,7 @@
 #include "cookchief.h"
 #include "cookchiefcontroller.h"
 #include "cookercontroller.h"
+#include "chaircontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -55,6 +56,8 @@ private:
     // Objets dans la salle de restauration
     Client *client;                    // Premier client
     Client *client2;                   // Deuxième client
+    Client *client3;
+    Client *client4;
     Table *table;                      // Première table
     Table *table2;                     // Deuxième table
     Table *table5;
@@ -63,6 +66,13 @@ private:
 
     Table *table3;                     // Troisième table
     Table *table4;
+    Table *table7;
+    Table *table8;
+    Table *table9;
+    Table *table10;
+    Table *table11;
+    Table *table12;
+    Table *table13;
 
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir
@@ -72,6 +82,10 @@ private:
     Stove *stove;                      // four
     CookChief *cookChief;              //chef cuisto
     Cooker *cooker;                    //cuisinier
+    QVector<Chair*> chairs;            //chaises
+    QVector<Chair*> chairs2;
+    QVector<Chair*> chairs3;
+    QVector<Chair*> chairs4;
 
 
 
