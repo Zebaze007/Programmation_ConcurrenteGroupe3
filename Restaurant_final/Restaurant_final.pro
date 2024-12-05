@@ -14,6 +14,7 @@ SOURCES += \
     clientcontroller.cpp \
     command.cpp \
     cookchief.cpp \
+    cookchiefcontroller.cpp \
     cooker.cpp \
     counter.cpp \
     countercontroller.cpp \
@@ -24,6 +25,8 @@ SOURCES += \
     managetools.cpp \
     materials.cpp \
     menu.cpp \
+    stove.cpp \
+    stovecontroller.cpp \
     table.cpp \
     tablecontroller.cpp \
     washer.cpp \
@@ -36,6 +39,7 @@ HEADERS += \
     clientcontroller.h \
     command.h \
     cookchief.h \
+    cookchiefcontroller.h \
     cooker.h \
     counter.h \
     countercontroller.h \
@@ -46,6 +50,8 @@ HEADERS += \
     managetools.h \
     materials.h \
     menu.h \
+    stove.h \
+    stovecontroller.h \
     table.h \
     tablecontroller.h \
     washer.h \

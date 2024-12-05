@@ -1,18 +1,30 @@
-#include "CookChief.h"
-#include <iostream>
+#include "cookchief.h"
 
-void CookChief::giveTasks() {
-    std::cout << "CookChief is assigning tasks to cookers." << std::endl;
+CookChief::CookChief(const QString &imagePath, int id, QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id)
+{
+    graphicsItem->setZValue(1); // Permet de superposer correctement
 }
 
-void CookChief::divideTasks(const std::string& task) {
-    std::cout << "CookChief is dividing task: " << task << std::endl;
+CookChief::~CookChief()
+{
+    delete graphicsItem;
 }
 
-void CookChief::updateStock() {
-    std::cout << "CookChief is updating the stock." << std::endl;
+void CookChief::setPosition(int x, int y, double scale)
+{
+    if (graphicsItem) {
+        graphicsItem->setPos(x, y);
+        graphicsItem->setScale(scale / 100.0);
+    }
 }
 
-void CookChief::createStock() {
-    std::cout << "CookChief is creating new stock." << std::endl;
+QGraphicsPixmapItem* CookChief::getGraphicsItem() const
+{
+    return graphicsItem;
+}
+
+int CookChief::getId() const
+{
+    return id;
 }

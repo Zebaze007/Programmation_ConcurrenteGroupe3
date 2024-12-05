@@ -9,21 +9,20 @@
 
 #include "cleaner.h"
 #include "command.h"
-#include "cookchief.h"
 #include "cooker.h"
 #include "counter.h"
 #include "dish.h"
-#include "dishwasher.h"
 #include "managetools.h"
 #include "materials.h"
 #include "menu.h"
 #include "washer.h"
-#include "washingmachine.h"
 #include "tablecontroller.h"
 #include "clientcontroller.h"
 #include "countercontroller.h"
 #include "washingmachinecontroller.h"
 #include "dishwashercontroller.h"
+#include "stovecontroller.h"
+#include "cookchiefcontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -56,12 +55,20 @@ private:
     Client *client2;                   // Deuxième client
     Table *table;                      // Première table
     Table *table2;                     // Deuxième table
+    Table *table5;
+    Table *table6;
+
+
     Table *table3;                     // Troisième table
+    Table *table4;
 
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir
+    Counter *counter2;
     WashingMachine *washingMachine;    // Lave-linge
     Dishwasher *dishwasher;            // Lave-vaisselle
+    Stove *stove;                      // four
+    CookChief *cookChief;              //chef cuisto
 
     // Gestion du temps
     QTimer *timer;                     // Timer pour le suivi du temps

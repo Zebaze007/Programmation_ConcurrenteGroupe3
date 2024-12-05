@@ -13,10 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
     , client2(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso1.png", 2, this))
     , table(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 1, this))
     , table2(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 2, this))
+    , table5(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 5, this))
+    , table6(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 6, this))
     , table3(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 3, this))
+    , table4(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 4, this))
     , counter(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 1, this))
+    , counter2(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 2, this))
     , washingMachine(new WashingMachine(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavelinge.png", 1, this))
     , dishwasher(new Dishwasher(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavevaissel.png", 1, this)) // Crée le lave-vaisselle
+    , stove(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
+    , cookChief(new CookChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chefcuisto.png", 1, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
 {
@@ -34,13 +40,27 @@ MainWindow::MainWindow(QWidget *parent)
     client2->setPosition(400, 150, 100.0);
 
     sceneDiningArea->addItem(table->getGraphicsItem());
-    table->setPosition(100, 200, 100.0);
+    table->setPosition(100, 500, 100.0);
 
     sceneDiningArea->addItem(table2->getGraphicsItem());
-    table2->setPosition(100, 100, 100.0);
+    table2->setPosition(100, 400, 100.0);
+
+    sceneDiningArea->addItem(table5->getGraphicsItem());
+    table5->setPosition(300, 500, 100.0);
+
+    sceneDiningArea->addItem(table6->getGraphicsItem());
+    table6->setPosition(300, 400, 100.0);
+
 
     sceneDiningArea->addItem(table3->getGraphicsItem());
-    table3->setPosition(400, 100, 100.0);
+    table3->setPosition(100, 100, 100.0);
+
+    sceneDiningArea->addItem(table4->getGraphicsItem());
+    table4->setPosition(100, 200, 100.0);
+
+    sceneDiningArea->addItem(counter2->getGraphicsItem());
+    counter2->setPosition(525, 300, 100.0);
+
 
     // Configurez la scène pour la cuisine
     ui->kitchenAreaView->setScene(sceneKitchenArea);
@@ -48,13 +68,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Ajoutez les objets à la cuisine
     sceneKitchenArea->addItem(counter->getGraphicsItem());
-    counter->setPosition(50, 300, 100.0);
+    counter->setPosition(25, 300, 100.0);
 
     sceneKitchenArea->addItem(washingMachine->getGraphicsItem());
     washingMachine->setPosition(550, 550, 100.0);
 
     sceneKitchenArea->addItem(dishwasher->getGraphicsItem());
     dishwasher->setPosition(550, 500, 100.0);
+
+    sceneKitchenArea->addItem(stove->getGraphicsItem());
+    stove->setPosition(550, 400, 100.0);
+
+    sceneKitchenArea->addItem(cookChief->getGraphicsItem());
+    cookChief->setPosition(80, 300, 50.0);
+
 
     // Connectez les boutons aux slots
     connect(ui->stratButton, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
