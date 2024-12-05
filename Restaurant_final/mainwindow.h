@@ -18,10 +18,13 @@
 #include "tablecontroller.h"
 #include "clientcontroller.h"
 #include "counter.h"
+#include "countercontroller.h"
 #include "washingmachinecontroller.h"
 #include "dishwashercontroller.h"
 #include "stovecontroller.h"
 #include "cookchief.h"
+#include "cookchiefcontroller.h"
+#include "cookercontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -68,6 +71,7 @@ private:
     Dishwasher *dishwasher;            // Lave-vaisselle
     Stove *stove;                      // four
     CookChief *cookChief;              //chef cuisto
+    Cooker *cooker;                    //cuisinier
 
 
 

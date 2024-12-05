@@ -16,6 +16,7 @@ SOURCES += \
     cookchief.cpp \
     cookchiefcontroller.cpp \
     cooker.cpp \
+    cookercontroller.cpp \
     counter.cpp \
     countercontroller.cpp \
     dishwasher.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     cookchief.h \
     cookchiefcontroller.h \
     cooker.h \
+    cookercontroller.h \
     counter.h \
     countercontroller.h \
     dish.h \

@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     , dishwasher(new Dishwasher(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavevaissel.png", 1, this)) // Crée le lave-vaisselle
     , stove(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
     , cookChief(new CookChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chefcuisto.png", 1, this))
+    , cooker(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chefcuisto.png", 1, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
 {
@@ -81,6 +82,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     sceneKitchenArea->addItem(stove->getGraphicsItem());
     stove->setPosition(550, 400, 100.0);
+
+    sceneKitchenArea->addItem(cooker->getGraphicsItem());
+    cooker->setPosition(510, 400, 50.0);
 
 
 
