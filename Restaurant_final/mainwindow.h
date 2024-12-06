@@ -26,6 +26,8 @@
 #include "cookchiefcontroller.h"
 #include "cookercontroller.h"
 #include "chaircontroller.h"
+#include "servercontroller.h"
+#include "roomclerkcontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -62,6 +64,8 @@ private:
     Table *table2;                     // Deuxième table
     Table *table5;
     Table *table6;
+    Table *table14;
+    Table *table15;
 
 
     Table *table3;                     // Troisième table
@@ -73,6 +77,11 @@ private:
     Table *table11;
     Table *table12;
     Table *table13;
+    Server *server1;
+    Server *server2;
+    Server *server3;
+    Server *server4;
+    RoomClerk *roomclerk;
 
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir

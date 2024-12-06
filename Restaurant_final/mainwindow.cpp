@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     , table2(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 2, this))
     , table5(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 5, this))
     , table6(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 6, this))
+    ,table14(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 14, this))
+    ,table15(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 15, this))
     , table3(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 3, this))
     , table4(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 4, this))
     , table7(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 7, this))
@@ -31,8 +33,13 @@ MainWindow::MainWindow(QWidget *parent)
     , washingMachine(new WashingMachine(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavelinge.png", 1, this))
     , dishwasher(new Dishwasher(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavevaissel.png", 1, this)) // Crée le lave-vaisselle
     , stove(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
-    , cookChief(new CookChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chefcuisto.png", 1, this))
-    , cooker(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chefcuisto.png", 1, this))
+    , cookChief(new CookChief("", 1, this))
+    , cooker(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
+    , server1(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 1, this))
+    , server2(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 2, this))
+    , server3(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 3, this))
+    , server4(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 4, this))
+    , roomclerk(new RoomClerk(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
 {
@@ -55,50 +62,60 @@ MainWindow::MainWindow(QWidget *parent)
     sceneDiningArea->addItem(client4->getGraphicsItem());
     client4->setPosition(120, 90, 100.0);
 
+    sceneDiningArea->addItem(server1->getGraphicsItem());
+    server1->setPosition(100, 150, 70.0);
+
+    sceneDiningArea->addItem(server4->getGraphicsItem());
+    server4->setPosition(375, 100, 70.0);
+
+    sceneDiningArea->addItem(server2->getGraphicsItem());
+    server2->setPosition(100, 450, 70.0);
+
+    sceneDiningArea->addItem(server3->getGraphicsItem());
+    server3->setPosition(400, 450, 70.0);
+
+    sceneDiningArea->addItem(roomclerk->getGraphicsItem());
+    roomclerk->setPosition(450, 250, 100.0);
+
+
+
     sceneDiningArea->addItem(table->getGraphicsItem());
     table->setPosition(100, 500, 100.0);
-
     sceneDiningArea->addItem(table2->getGraphicsItem());
     table2->setPosition(100, 400, 100.0);
-
     sceneDiningArea->addItem(table5->getGraphicsItem());
     table5->setPosition(300, 500, 100.0);
-
     sceneDiningArea->addItem(table6->getGraphicsItem());
     table6->setPosition(300, 400, 100.0);
+    sceneDiningArea->addItem(table14->getGraphicsItem());
+    table14->setPosition(500, 400, 100.0);
+    sceneDiningArea->addItem(table15->getGraphicsItem());
+    table15->setPosition(500, 500, 100.0);
 
 
     sceneDiningArea->addItem(table3->getGraphicsItem());
     table3->setPosition(100, 100, 100.0);
-
     sceneDiningArea->addItem(table4->getGraphicsItem());
     table4->setPosition(100, 200, 100.0);
-
     sceneDiningArea->addItem(table7->getGraphicsItem());
     table7->setPosition(300, 100, 100.0);
-
     sceneDiningArea->addItem(table8->getGraphicsItem());
     table8->setPosition(300, 200, 100.0);
-
     sceneDiningArea->addItem(table9->getGraphicsItem());
     table9->setPosition(500, 100, 100.0);
-
     sceneDiningArea->addItem(table10->getGraphicsItem());
     table10->setPosition(500, 200, 100.0);
-
     sceneDiningArea->addItem(table11->getGraphicsItem());
     table11->setPosition(100, 25, 100.0);
-
     sceneDiningArea->addItem(table12->getGraphicsItem());
     table12->setPosition(300, 25, 100.0);
-
     sceneDiningArea->addItem(table13->getGraphicsItem());
     table13->setPosition(500, 25, 100.0);
 
 
 
     sceneDiningArea->addItem(counter2->getGraphicsItem());
-    counter2->setPosition(525, 300, 100.0);
+    counter2->setPosition(500, 300, 100.0);
 
 
     for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
@@ -119,7 +136,7 @@ MainWindow::MainWindow(QWidget *parent)
       }
 
 
-    for (int i = 0; i < 10; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
           Chair *chair2 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
           chairs.append(chair2);
 
@@ -137,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent)
           sceneDiningArea->addItem(chair2->getGraphicsItem());
       }
 
-    for (int i = 0; i < 10; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
         Chair *chair3 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
         chairs.append(chair3);
 
@@ -155,7 +172,7 @@ MainWindow::MainWindow(QWidget *parent)
         sceneDiningArea->addItem(chair3->getGraphicsItem());
     }
 
-    for (int i = 0; i < 10; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
         Chair *chair4 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
         chairs.append(chair4);
 
@@ -172,6 +189,10 @@ MainWindow::MainWindow(QWidget *parent)
         // Ajoutez la chaise à la scène
         sceneDiningArea->addItem(chair4->getGraphicsItem());
     }
+
+
+
+
 
     // Configurez la scène pour la cuisine
     ui->kitchenAreaView->setScene(sceneKitchenArea);
@@ -195,7 +216,7 @@ MainWindow::MainWindow(QWidget *parent)
     stove->setPosition(550, 400, 100.0);
 
     sceneKitchenArea->addItem(cooker->getGraphicsItem());
-    cooker->setPosition(510, 400, 50.0);
+    cooker->setPosition(510, 400, 100.0);
 
 
 
@@ -214,6 +235,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete timer;
+
 }
 
 // Mise à jour de l'affichage du temps

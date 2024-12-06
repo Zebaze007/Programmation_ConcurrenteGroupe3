@@ -28,6 +28,10 @@ SOURCES += \
     managetools.cpp \
     materials.cpp \
     menu.cpp \
+    roomclerk.cpp \
+    roomclerkcontroller.cpp \
+    server.cpp \
+    servercontroller.cpp \
     stove.cpp \
     stovecontroller.cpp \
     table.cpp \
@@ -56,6 +60,10 @@ HEADERS += \
     managetools.h \
     materials.h \
     menu.h \
+    roomclerk.h \
+    roomclerkcontroller.h \
+    server.h \
+    servercontroller.h \
     stove.h \
     stovecontroller.h \
     table.h \
