@@ -1,14 +1,14 @@
 #include "Menu.h"
-#include "Dish.h"
+//#include "Dish.h"
 
-void Menu::disableDish(Dish* dish) {
-    dish->setReady(false);
-}
+//void Menu::disableDish(Dish* dish) {
+//    dish->setReady(false);
+//}
 
-void Menu::buildMenu() {
+//void Menu::buildMenu() {
     // Logique pour construire le menu
-}
+//}
 
-void Menu::enableDish(Dish* dish) {
-    dish->setReady(true);
-}
+//void Menu::enableDish(Dish* dish) {
+//    dish->setReady(true);
+//}

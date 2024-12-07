@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="/">
+    <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chef de cuisine.png</file>
+    <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/maitre.png</file>
+    <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png</file>
+    <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plate.png</file>
     <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png</file>
     <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png</file>
     <file>build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png</file>

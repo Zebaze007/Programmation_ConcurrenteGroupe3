@@ -28,6 +28,8 @@
 #include "chaircontroller.h"
 #include "servercontroller.h"
 #include "roomclerkcontroller.h"
+#include "washer.h"
+#include "butlercontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -47,6 +49,8 @@ private slots:
     void onStopButtonClicked();        // Bouton Stopper
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
     void updateClientPositions();      // Mise à jour des positions des clients
+    void updateServerPositions();
+
 
 private:
     Ui::MainWindow *ui;
@@ -60,6 +64,14 @@ private:
     Client *client2;                   // Deuxième client
     Client *client3;
     Client *client4;
+    Client *client5;
+    Client *client6;
+    Client *client7;
+    Client *client8;
+    Client *client9;
+    Client *client10;
+    Client *client11;
+    Client *client12;
     Table *table;                      // Première table
     Table *table2;                     // Deuxième table
     Table *table5;
@@ -82,7 +94,9 @@ private:
     Server *server3;
     Server *server4;
     RoomClerk *roomclerk;
-
+    Dish *dish;
+    Dish *dish2;
+    Butler *butler;
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir
     Counter *counter2;
@@ -91,6 +105,8 @@ private:
     Stove *stove;                      // four
     CookChief *cookChief;              //chef cuisto
     Cooker *cooker;                    //cuisinier
+    Washer *washer;
+    Washer *washer2;
     QVector<Chair*> chairs;            //chaises
     QVector<Chair*> chairs2;
     QVector<Chair*> chairs3;

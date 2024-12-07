@@ -1,24 +1,23 @@
 #ifndef DISH_H
 #define DISH_H
 
-#include <string>
+#include <QGraphicsPixmapItem>
+#include <QObject>
 
-class Dish {
-private:
-    std::string name;
-    int idRecipe;
-    bool ready;
+class Dish : public QObject {
+    Q_OBJECT
 
 public:
-    Dish(const std::string& name, int idRecipe, bool ready);
+    Dish(const QString &imagePath, int id, QObject *parent = nullptr);
+    ~Dish();
 
-    // Getters et Setters
-    std::string getName() const;
-    void setName(const std::string& value);
-    int getIdRecipe() const;
-    void setIdRecipe(int value);
-    bool isReady() const;
-    void setReady(bool value);
+    void setPosition(int x, int y, double scale = 100.0);
+    QGraphicsPixmapItem* getGraphicsItem() const;
+    int getId() const;
+
+private:
+    QGraphicsPixmapItem *graphicsItem;
+    int id;
 };
 
 #endif // DISH_H

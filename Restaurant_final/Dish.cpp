@@ -1,28 +1,30 @@
-#include "Dish.h"
+#include "dish.h"
 
-Dish::Dish(const std::string& name, int idRecipe, bool ready)
-    : name(name), idRecipe(idRecipe), ready(ready) {}
-
-std::string Dish::getName() const {
-    return name;
+Dish::Dish(const QString &imagePath, int id, QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id)
+{
+    graphicsItem->setZValue(1); // Optionnel : permet de gérer la superposition
 }
 
-void Dish::setName(const std::string& value) {
-    name = value;
+Dish::~Dish()
+{
+    delete graphicsItem;
 }
 
-int Dish::getIdRecipe() const {
-    return idRecipe;
+void Dish::setPosition(int x, int y, double scale)
+{
+    if (graphicsItem) {
+        graphicsItem->setPos(x, y);
+        graphicsItem->setScale(scale / 100.0);
+    }
 }
 
-void Dish::setIdRecipe(int value) {
-    idRecipe = value;
+QGraphicsPixmapItem* Dish::getGraphicsItem() const
+{
+    return graphicsItem;
 }
 
-bool Dish::isReady() const {
-    return ready;
-}
-
-void Dish::setReady(bool value) {
-    ready = value;
+int Dish::getId() const
+{
+    return id;
 }

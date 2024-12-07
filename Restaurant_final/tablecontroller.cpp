@@ -23,4 +23,3 @@ Table *TableController::findTableById(int tableId) {
     }
     return nullptr;
 }
-

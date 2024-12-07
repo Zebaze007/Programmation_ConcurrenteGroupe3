@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     Dish.cpp \
+    butler.cpp \
+    butlercontroller.cpp \
     chair.cpp \
     chaircontroller.cpp \
     client.cpp \
@@ -21,6 +23,7 @@ SOURCES += \
     cookercontroller.cpp \
     counter.cpp \
     countercontroller.cpp \
+    dishcontroller.cpp \
     dishwasher.cpp \
     dishwashercontroller.cpp \
     main.cpp \
@@ -41,6 +44,8 @@ SOURCES += \
     washingmachinecontroller.cpp
 
 HEADERS += \
+    butler.h \
+    butlercontroller.h \
     chair.h \
     chaircontroller.h \
     cleaner.h \
@@ -54,6 +59,7 @@ HEADERS += \
     counter.h \
     countercontroller.h \
     dish.h \
+    dishcontroller.h \
     dishwasher.h \
     dishwashercontroller.h \
     mainwindow.h \
