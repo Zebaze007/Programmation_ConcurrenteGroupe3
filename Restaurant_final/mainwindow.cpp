@@ -42,8 +42,12 @@ MainWindow::MainWindow(QWidget *parent)
     , washingMachine(new WashingMachine(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavelinge.png", 1, this))
     , dishwasher(new Dishwasher(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavevaissel.png", 1, this)) // Crée le lave-vaisselle
     , stove(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
+    , stove2(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
     , cookChief(new CookChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chef de cuisine.png", 1, this))
     , cooker(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
+    , cooker2(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
+    , assistant(new KitchenAssistant(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
+    , assistant2(new KitchenAssistant(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
     , server1(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 1, this))
     , server2(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 2, this))
     , server3(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 3, this))
@@ -279,9 +283,20 @@ MainWindow::MainWindow(QWidget *parent)
     sceneKitchenArea->addItem(stove->getGraphicsItem());
     stove->setPosition(550, 400, 100.0);
 
+    sceneKitchenArea->addItem(stove2->getGraphicsItem());
+    stove2->setPosition(550, 450, 100.0);
+
     sceneKitchenArea->addItem(cooker->getGraphicsItem());
     cooker->setPosition(510, 400, 100.0);
 
+    sceneKitchenArea->addItem(cooker2->getGraphicsItem());
+    cooker2->setPosition(510, 450, 100.0);
+
+    sceneKitchenArea->addItem(assistant->getGraphicsItem());
+    assistant->setPosition(480, 400, 100.0);
+
+    sceneKitchenArea->addItem(assistant2->getGraphicsItem());
+    assistant2->setPosition(480, 450, 100.0);
 
 
 
