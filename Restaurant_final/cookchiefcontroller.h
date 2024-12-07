@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Menu.h"
-#include "countercontroller.h"
+#include "counter.h"
 
 class CookChief {
 private:

@@ -30,6 +30,7 @@
 #include "roomclerkcontroller.h"
 #include "washer.h"
 #include "butlercontroller.h"
+#include "rankchiefcontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -97,6 +98,8 @@ private:
     Dish *dish;
     Dish *dish2;
     Butler *butler;
+    RankChief *rankChief;
+    RankChief *rankChief2;
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir
     Counter *counter2;
@@ -113,7 +116,11 @@ private:
     QVector<Chair*> chairs4;
 
 
+    QTimer *tableTimer; // Timer pour gérer le délai à la table
 
+    QPoint tablePosition;      // Position de la table
+    QPoint clientInitialPos;  // Position initiale de client1
+    QPoint client2InitialPos;  // Position initiale de client2
     // Gestion du temps
     QTimer *timer;                     // Timer pour le suivi du temps
     int elapsedSeconds;                // Temps écoulé en secondes

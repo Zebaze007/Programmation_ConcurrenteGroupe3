@@ -54,16 +54,29 @@ MainWindow::MainWindow(QWidget *parent)
     , butler(new Butler(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/maitre.png", 4, this))
     , washer(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , washer2(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
+    , rankChief(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
+    , rankChief2(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
 {
     ui->setupUi(this);
+
 
     // Configurez la scène pour la salle de restauration
     ui->diningAreaView->setScene(sceneDiningArea);
     sceneDiningArea->setSceneRect(0, 0, ui->diningAreaView->width(), ui->diningAreaView->height());
 
     // Ajoutez les objets à la salle de restauration
+
+
+
+    sceneDiningArea->addItem(rankChief->getGraphicsItem());
+    rankChief->setPosition(400, 400, 100.0);
+
+
+    sceneDiningArea->addItem(rankChief2->getGraphicsItem());
+    rankChief2->setPosition(400, 150, 100.0);
+
 
     sceneDiningArea->addItem(butler->getGraphicsItem());
     butler->setPosition(100, 300, 100.0);
@@ -376,6 +389,14 @@ void MainWindow::updateServerPositions()
     int newY = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
     roomclerk->setPosition(newX, newY, 100.0);
 
+    int newX5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
+    int newY5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
+    rankChief->setPosition(newX5, newY5, 100.0);
+
+    int newX6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
+    int newY6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
+    rankChief2->setPosition(newX6, newY6, 100.0);
+
 
 }
 
@@ -418,6 +439,9 @@ void MainWindow::onStopButtonClicked()
     server2->setPosition(100, 450, 70.0);
     server3->setPosition(400, 450, 70.0);
     roomclerk->setPosition(450, 250, 100.0);
+    rankChief->setPosition(400, 400, 100.0);
+    rankChief2->setPosition(400, 150, 100.0);
+
 
 
 }

@@ -31,6 +31,8 @@ SOURCES += \
     managetools.cpp \
     materials.cpp \
     menu.cpp \
+    rankchief.cpp \
+    rankchiefcontroller.cpp \
     roomclerk.cpp \
     roomclerkcontroller.cpp \
     server.cpp \
@@ -66,6 +68,8 @@ HEADERS += \
     managetools.h \
     materials.h \
     menu.h \
+    rankchief.h \
+    rankchiefcontroller.h \
     roomclerk.h \
     roomclerkcontroller.h \
     server.h \
