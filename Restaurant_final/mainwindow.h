@@ -36,6 +36,7 @@
 #include "rankchief.h"
 #include "kitchenassistantcontroller.h"
 #include "kitchenassistant.h"
+#include "fridgecontroller.h"
 
 
 
@@ -133,6 +134,7 @@ private:
     QVector<Chair*> chairs9;
     KitchenAssistant *assistant;       //commis de cuisine
     KitchenAssistant *assistant2;
+    Fridge *fridge;
 
     // Gestion du temps
     QTimer *timer;                     // Timer pour le suivi du temps

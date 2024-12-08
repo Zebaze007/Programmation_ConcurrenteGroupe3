@@ -27,6 +27,8 @@ SOURCES += \
     dishcontroller.cpp \
     dishwasher.cpp \
     dishwashercontroller.cpp \
+    fridge.cpp \
+    fridgecontroller.cpp \
     kitchenassistant.cpp \
     kitchenassistantcontroller.cpp \
     main.cpp \
@@ -69,6 +71,8 @@ HEADERS += \
     dishcontroller.h \
     dishwasher.h \
     dishwashercontroller.h \
+    fridge.h \
+    fridgecontroller.h \
     kitchenassistant.h \
     kitchenassistantcontroller.h \
     mainwindow.h \

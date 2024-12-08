@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     , washer(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , washer2(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , rankChief(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
+    , fridge(new Fridge(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/frigo.png", this)) // Chemin de l'image du frigo
     , rankChief2(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
@@ -96,13 +97,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     sceneDiningArea->addItem(client10->getGraphicsItem());
-    client10->setPosition(39, 325, 100.0);
+    client10->setPosition(79, 400, 100.0);
 
     sceneDiningArea->addItem(client11->getGraphicsItem());
-    client11->setPosition(39, 285, 100.0);
+    client11->setPosition(145, 400, 100.0);
 
     sceneDiningArea->addItem(client12->getGraphicsItem());
-    client12->setPosition(39, 265, 100.0);
+    client12->setPosition(280, 500, 100.0);
 
     sceneDiningArea->addItem(server1->getGraphicsItem());
     server1->setPosition(100, 150, 70.0);
@@ -184,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
         sceneDiningArea->addItem(chair->getGraphicsItem());
       }
 
-    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 10; ++i) { // Ajoutons 4 chaises
         Chair *chair5 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
         chairs.append(chair5);
 
@@ -192,15 +193,19 @@ MainWindow::MainWindow(QWidget *parent)
         switch (i) {
         case 0: chair5->setPosition(70, 400, 100.0); break; // gauche
         case 1: chair5->setPosition(160, 400, 100.0); break; // droite
-        case 2: chair5->setPosition(115, 440, 100.0); break; // haut
-        case 3: chair5->setPosition(115, 360, 100.0); break; //bas
+        case 2: chair5->setPosition(125, 440, 100.0); break; // haut
+        case 3: chair5->setPosition(125, 360, 100.0); break; //bas
+        case 4: chair5->setPosition(70, 415, 100.0); break; // gauche
+        case 5: chair5->setPosition(160, 415, 100.0); break; // droite
+        case 6: chair5->setPosition(100, 440, 100.0); break; // haut
+        case 7: chair5->setPosition(100, 360, 100.0); break; //bas
 
         }
 
         // Ajoutez la chaise à la scène
         sceneDiningArea->addItem(chair5->getGraphicsItem());
     }
-    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 8; ++i) { // Ajoutons 4 chaises
         Chair *chair6 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
         chairs.append(chair6);
 
@@ -208,8 +213,10 @@ MainWindow::MainWindow(QWidget *parent)
         switch (i) {
         case 0: chair6->setPosition(270, 500, 100.0); break; // En haut
         case 1: chair6->setPosition(360, 500, 100.0); break; // En bas
-        case 2: chair6->setPosition(315, 540, 100.0); break; // À gauche
-        case 3: chair6->setPosition(315, 460, 100.0); break; // À droite
+        case 2: chair6->setPosition(325, 540, 100.0); break; // À gauche
+        case 3: chair6->setPosition(325, 460, 100.0); break; // À droite
+        case 4: chair6->setPosition(300, 540, 100.0); break; // À gauche
+        case 5: chair6->setPosition(300, 460, 100.0); break; // À droite
 
         }
 
@@ -373,6 +380,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     sceneKitchenArea->addItem(cooker->getGraphicsItem());
     cooker->setPosition(510, 400, 100.0);
+
+    sceneKitchenArea->addItem(fridge->getGraphicsItem());
+    fridge->setPosition(510, 200, 100.0);
 
     sceneKitchenArea->addItem(cooker2->getGraphicsItem());
     cooker2->setPosition(510, 450, 100.0);
