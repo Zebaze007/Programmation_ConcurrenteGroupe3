@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     , washer(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , washer2(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , rankChief(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
-    , fridge(new Fridge(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/frigo.png", this)) // Chemin de l'image du frigo
+    , fridge(new Fridge(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/frigo.png", this))
     , rankChief2(new RankChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
     , timer(new QTimer(this)) // Timer pour gérer les déplacements
     , elapsedSeconds(0) // Initialisation du temps écoulé
@@ -112,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
     server4->setPosition(375, 100, 70.0);
 
     sceneDiningArea->addItem(server2->getGraphicsItem());
-    server2->setPosition(100, 450, 70.0);
+    server2->setPosition(70, 450, 70.0);
 
     sceneDiningArea->addItem(server3->getGraphicsItem());
     server3->setPosition(400, 450, 70.0);
@@ -185,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
         sceneDiningArea->addItem(chair->getGraphicsItem());
       }
 
-    for (int i = 0; i < 10; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 8; ++i) { // Ajoutons 4 chaises
         Chair *chair5 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
         chairs.append(chair5);
 
@@ -205,7 +205,7 @@ MainWindow::MainWindow(QWidget *parent)
         // Ajoutez la chaise à la scène
         sceneDiningArea->addItem(chair5->getGraphicsItem());
     }
-    for (int i = 0; i < 8; ++i) { // Ajoutons 4 chaises
+    for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
         Chair *chair6 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
         chairs.append(chair6);
 

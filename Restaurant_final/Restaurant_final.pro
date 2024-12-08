@@ -43,6 +43,8 @@ SOURCES += \
     roomclerkcontroller.cpp \
     server.cpp \
     servercontroller.cpp \
+    store.cpp \
+    storecontroller.cpp \
     stove.cpp \
     stovecontroller.cpp \
     table.cpp \
@@ -86,6 +88,8 @@ HEADERS += \
     roomclerkcontroller.h \
     server.h \
     servercontroller.h \
+    store.h \
+    storecontroller.h \
     stove.h \
     stovecontroller.h \
     table.h \
