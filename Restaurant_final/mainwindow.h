@@ -126,6 +126,11 @@ private:
     QVector<Chair*> chairs2;
     QVector<Chair*> chairs3;
     QVector<Chair*> chairs4;
+    QVector<Chair*> chairs5;
+    QVector<Chair*> chairs6;
+    QVector<Chair*> chairs7;
+    QVector<Chair*> chairs8;
+    QVector<Chair*> chairs9;
     KitchenAssistant *assistant;       //commis de cuisine
     KitchenAssistant *assistant2;
 

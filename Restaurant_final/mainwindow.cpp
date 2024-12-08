@@ -94,23 +94,6 @@ MainWindow::MainWindow(QWidget *parent)
     sceneDiningArea->addItem(client3->getGraphicsItem());
     client3->setPosition(79, 285, 100.0);
 
-    sceneDiningArea->addItem(client4->getGraphicsItem());
-    client4->setPosition(79, 265, 100.0);
-
-    sceneDiningArea->addItem(client5->getGraphicsItem());
-    client5->setPosition(59, 300, 100.0);
-
-    sceneDiningArea->addItem(client6->getGraphicsItem());
-    client6->setPosition(59, 325, 100.0);
-
-    sceneDiningArea->addItem(client7->getGraphicsItem());
-    client7->setPosition(59, 285, 100.0);
-
-    sceneDiningArea->addItem(client8->getGraphicsItem());
-    client8->setPosition(59, 265, 100.0);
-
-    sceneDiningArea->addItem(client9->getGraphicsItem());
-    client9->setPosition(39, 300, 100.0);
 
     sceneDiningArea->addItem(client10->getGraphicsItem());
     client10->setPosition(39, 325, 100.0);
@@ -173,6 +156,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
+
     sceneDiningArea->addItem(counter2->getGraphicsItem());
     counter2->setPosition(500, 300, 100.0);
 
@@ -200,6 +184,89 @@ MainWindow::MainWindow(QWidget *parent)
         sceneDiningArea->addItem(chair->getGraphicsItem());
       }
 
+    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+        Chair *chair5 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
+        chairs.append(chair5);
+
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair5->setPosition(70, 400, 100.0); break; // gauche
+        case 1: chair5->setPosition(160, 400, 100.0); break; // droite
+        case 2: chair5->setPosition(115, 440, 100.0); break; // haut
+        case 3: chair5->setPosition(115, 360, 100.0); break; //bas
+
+        }
+
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair5->getGraphicsItem());
+    }
+    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+        Chair *chair6 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
+        chairs.append(chair6);
+
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair6->setPosition(270, 500, 100.0); break; // En haut
+        case 1: chair6->setPosition(360, 500, 100.0); break; // En bas
+        case 2: chair6->setPosition(315, 540, 100.0); break; // À gauche
+        case 3: chair6->setPosition(315, 460, 100.0); break; // À droite
+
+        }
+
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair6->getGraphicsItem());
+    }
+    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+        Chair *chair7 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
+        chairs.append(chair7);
+
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair7->setPosition(270, 400, 100.0); break; // En haut
+        case 1: chair7->setPosition(360, 400, 100.0); break; // En bas
+        case 2: chair7->setPosition(315, 440, 100.0); break; // À gauche
+        case 3: chair7->setPosition(315, 360, 100.0); break; // À droite
+
+        }
+
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair7->getGraphicsItem());
+    }
+
+    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+        Chair *chair8 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
+        chairs.append(chair8);
+
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair8->setPosition(460, 400, 100.0); break; // En haut
+        case 1: chair8->setPosition(570, 400, 100.0); break; // En bas
+        case 2: chair8->setPosition(515, 440, 100.0); break; // À gauche
+        case 3: chair8->setPosition(515, 360, 100.0); break; // À droite
+
+        }
+
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair8->getGraphicsItem());
+    }
+
+
+    for (int i = 0; i < 4; ++i) { // Ajoutons 4 chaises
+        Chair *chair9 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
+        chairs.append(chair9);
+
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair9->setPosition(460, 500, 100.0); break; // En haut
+        case 1: chair9->setPosition(570, 500, 100.0); break; // En bas
+        case 2: chair9->setPosition(515, 540, 100.0); break; // À gauche
+        case 3: chair9->setPosition(515, 460, 100.0); break; // À droite
+
+        }
+
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair9->getGraphicsItem());
+    }
 
     for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
           Chair *chair2 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
@@ -254,6 +321,24 @@ MainWindow::MainWindow(QWidget *parent)
         // Ajoutez la chaise à la scène
         sceneDiningArea->addItem(chair4->getGraphicsItem());
     }
+
+    sceneDiningArea->addItem(client4->getGraphicsItem());
+    client4->setPosition(65, 105, 100.0);
+
+    sceneDiningArea->addItem(client5->getGraphicsItem());
+    client5->setPosition(135, 105, 100.0);
+
+    sceneDiningArea->addItem(client6->getGraphicsItem());
+    client6->setPosition(280, 105, 100.0);
+
+    sceneDiningArea->addItem(client7->getGraphicsItem());
+    client7->setPosition(320, 105, 100.0);
+
+    sceneDiningArea->addItem(client8->getGraphicsItem());
+    client8->setPosition(480, 105, 100.0);
+
+    sceneDiningArea->addItem(client9->getGraphicsItem());
+    client9->setPosition(520, 105, 100.0);
 
 
     // Configurez la scène pour la cuisine
@@ -433,12 +518,6 @@ void MainWindow::onStopButtonClicked()
     client->setPosition(79, 300, 100.0);
     client2->setPosition(79, 325, 100.0);
     client3->setPosition(79, 285, 100.0);
-    client4->setPosition(79, 265, 100.0);
-    client5->setPosition(59, 300, 100.0);
-    client6->setPosition(59, 325, 100.0);
-    client7->setPosition(59, 285, 100.0);
-    client8->setPosition(59, 265, 100.0);
-    client9->setPosition(39, 300, 100.0);
     client10->setPosition(39, 325, 100.0);
     client11->setPosition(39, 285, 100.0);
     client12->setPosition(39, 265, 100.0);
