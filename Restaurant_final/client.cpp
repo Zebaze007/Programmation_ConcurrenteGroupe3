@@ -1,5 +1,6 @@
 #include "client.h"
 #include <QGraphicsTextItem>
+#include <QPropertyAnimation>
 #include <QFont>
 
 Client::Client(const QString &imagePath, int id, QObject *parent)
@@ -66,3 +67,5 @@ void Client::setImagePath(const QString &path)
         graphicsItem->setPixmap(pixmap);
     }
 }
+
+

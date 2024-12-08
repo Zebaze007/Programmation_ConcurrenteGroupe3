@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QRandomGenerator>
-#include <QMessageBox>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -307,8 +307,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connectez le timer à la mise à jour du temps et des déplacements
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTimeDisplay);
-    connect(timer, &QTimer::timeout, this, &MainWindow::updateClientPositions);
-    connect(timer, &QTimer::timeout, this, &MainWindow::updateServerPositions);
+    connect(timer, &QTimer::timeout, this, &MainWindow::moveClients);
+
+
+
+    // Définir les points de départ et d'arrivée
+    startPosition1 = QPoint(79, 300);
+    endPosition1 = QPoint(70, 500);
+
+    startPosition2 = QPoint(79, 325);
+    endPosition2 = QPoint(160, 500);
+
+    startPosition3 = QPoint(79, 325);
+    endPosition3 = QPoint(115, 540);
+
+
 
 
 }
@@ -328,92 +341,49 @@ void MainWindow::updateTimeDisplay()
     ui->timeButton->setText(QString("Time: %1s").arg(elapsedSeconds));
 }
 
-// Mise à jour des positions des clients
-void MainWindow::updateClientPositions()
+
+
+
+void MainWindow::startClientMovement()
 {
-    int newX1 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY1 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client->setPosition(newX1, newY1, 100.0);
+    qDebug() << "Mouvement des clients démarré.";
 
-    int newX2 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY2 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client2->setPosition(newX2, newY2, 100.0);
+    // Démarre les timers pour animer les déplacements des clients
+    timerClient = new QTimer(this);
+    connect(timerClient, &QTimer::timeout, [this]() {
+        isReturningClient = true;
+        moveClientInLoop(client, endPosition1, startPosition1, 10); // Retour au point de départ
+    });
 
-    int newX3 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY3 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client3->setPosition(newX3, newY3, 100.0);
+    timerClient2 = new QTimer(this);
+    connect(timerClient2, &QTimer::timeout, [this]() {
+        isReturningClient2 = true;
+        moveClientInLoop(client2, endPosition2, startPosition2, 10); // Retour au point de départ
+    });
 
-    int newX4 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY4 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client4->setPosition(newX4, newY4, 100.0);
+    timerClient3 = new QTimer(this);
+    connect(timerClient3, &QTimer::timeout, [this]() {
+        isReturningClient3 = true;
+        moveClientInLoop(client3, endPosition3, startPosition3, 10); // Retour au point de départ
+    });
 
-    int newX5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client5->setPosition(newX5, newY5, 100.0);
-
-    int newX6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client6->setPosition(newX6, newY6, 100.0);
-
-    int newX7 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY7 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client7->setPosition(newX7, newY7, 100.0);
-
-    int newX8 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY8 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client8->setPosition(newX8, newY8, 100.0);
-
-
-    int newX9 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY9 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client9->setPosition(newX9, newY9, 100.0);
-
-    int newX10 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY10 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client10->setPosition(newX10, newY10, 100.0);
-
-    int newX11 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY11 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client11->setPosition(newX11, newY11, 100.0);
-
-    int newX12 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY12 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    client12->setPosition(newX12, newY12, 100.0);
+    // Initialiser le mouvement des clients
+    timerClient->start(5000);  // Délai avant le retour pour client 1
+    timerClient2->start(7000); // Délai avant le retour pour client 2
+    timerClient3->start(8000); // Délai avant le retour pour client 3
 }
 
-// Mise à jour des positions des serveurs et du commis
-void MainWindow::updateServerPositions()
+
+void MainWindow::moveClients()
 {
-    int newX1 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY1 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    server1->setPosition(newX1, newY1, 70.0);
-
-    int newX2 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY2 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    server2->setPosition(newX2, newY2, 70.0);
-
-    int newX3 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY3 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    server3->setPosition(newX3, newY3, 70.0);
-
-    int newX4 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY4 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    server4->setPosition(newX4, newY4, 70.0);
-
-    int newX = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    roomclerk->setPosition(newX, newY, 100.0);
-
-    int newX5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY5 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    rankChief->setPosition(newX5, newY5, 100.0);
-
-    int newX6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->width()) - 50);
-    int newY6 = QRandomGenerator::global()->bounded(0, static_cast<int>(sceneDiningArea->height()) - 50);
-    rankChief2->setPosition(newX6, newY6, 100.0);
-
-
+    // Déplacer chaque client d'un point à l'autre
+    moveClientInLoop(client, startPosition1, endPosition1, 10);
+    moveClientInLoop(client2, startPosition2, endPosition2, 10);
+    moveClientInLoop(client3, startPosition3, endPosition3, 10);
 }
+
+
+
 
 
 // Slot pour le bouton Démarrer
@@ -421,6 +391,9 @@ void MainWindow::onStartButtonClicked()
 {
     qDebug() << "Bouton Démarrer cliqué.";
     timer->start(1000); // Démarre le timer pour mises à jour toutes les 1000ms (1 seconde)
+
+    // Démarre les timers spécifiques pour le mouvement des clients
+    startClientMovement();
 }
 
 // Slot pour le bouton Pause
@@ -428,6 +401,11 @@ void MainWindow::onPauseButtonClicked()
 {
     qDebug() << "Bouton Pause cliqué.";
     timer->stop(); // Arrête temporairement le timer
+
+    // Arrêter les timers des clients pour stopper leur retour temporairement
+    timerClient->stop();
+    timerClient2->stop();
+    timerClient3->stop();
 }
 
 // Slot pour le bouton Stopper
@@ -437,6 +415,21 @@ void MainWindow::onStopButtonClicked()
     timer->stop();             // Arrête le timer
     elapsedSeconds = 0;        // Réinitialise le temps écoulé
     ui->timeButton->setText("Time: 0s"); // Réinitialise l'affichage
+
+    // Arrête tous les timers
+    timer->stop();
+    timerClient->stop();
+    timerClient2->stop();
+    timerClient3->stop();
+
+    // Réinitialise l'état des flags de retour
+    isReturningClient = false;
+    isReturningClient2 = false;
+    isReturningClient3 = false;
+
+
+
+
     client->setPosition(79, 300, 100.0);
     client2->setPosition(79, 325, 100.0);
     client3->setPosition(79, 285, 100.0);
@@ -457,6 +450,32 @@ void MainWindow::onStopButtonClicked()
     rankChief->setPosition(400, 400, 100.0);
     rankChief2->setPosition(400, 150, 100.0);
 
+}
 
+void MainWindow::moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = client->getGraphicsItem()->pos().toPoint();
 
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        client->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        client->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
 }

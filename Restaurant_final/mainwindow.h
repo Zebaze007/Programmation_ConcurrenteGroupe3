@@ -9,29 +9,34 @@
 
 #include "cleaner.h"
 #include "command.h"
-
+#include "commandcontroller.h"
+#include "cookchief.h"
+#include "cookchiefcontroller.h"
+#include "counter.h"
+#include "countercontroller.h"
+#include "cookercontroller.h"
+#include "chaircontroller.h"
 #include "dish.h"
+#include "dishcontroller.h"
 #include "managetools.h"
 #include "materials.h"
 #include "menu.h"
 #include "washer.h"
 #include "tablecontroller.h"
 #include "clientcontroller.h"
-#include "counter.h"
-#include "countercontroller.h"
 #include "washingmachinecontroller.h"
 #include "dishwashercontroller.h"
 #include "stovecontroller.h"
-#include "cookchief.h"
-#include "cookchiefcontroller.h"
-#include "cookercontroller.h"
-#include "chaircontroller.h"
 #include "servercontroller.h"
 #include "roomclerkcontroller.h"
+#include "roomclerk.h"
 #include "washer.h"
 #include "butlercontroller.h"
 #include "rankchiefcontroller.h"
+#include "rankchief.h"
 #include "kitchenassistantcontroller.h"
+#include "kitchenassistant.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -51,8 +56,8 @@ private slots:
     void onPauseButtonClicked();       // Bouton Pause
     void onStopButtonClicked();        // Bouton Stopper
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
-    void updateClientPositions();      // Mise à jour des positions des clients
-    void updateServerPositions();
+    void moveClients();
+     void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
 
 
 private:
@@ -127,6 +132,28 @@ private:
     // Gestion du temps
     QTimer *timer;                     // Timer pour le suivi du temps
     int elapsedSeconds;                // Temps écoulé en secondes
+
+    // Définir les points de départ et d'arrivée
+    QPoint startPosition1, endPosition1;
+    QPoint startPosition2, endPosition2;
+    QPoint startPosition3, endPosition3;
+
+    // Timers pour chaque client
+    QTimer *timerClient;
+    QTimer *timerClient2;
+    QTimer *timerClient3;
+
+
+    // Indicateurs pour savoir si les clients sont en mouvement
+    bool isReturningClient = false;
+    bool isReturningClient2 = false;
+    bool isReturningClient3 = false;
+
+
+    void startClientMovement();  // Démarrer le mouvement des clients
+
+    // Méthode pour déplacer un client entre deux points
+    void moveClientInLoop(Client *client, const QPoint &start, const QPoint &end, int speed);
 };
 
 #endif // MAINWINDOW_H

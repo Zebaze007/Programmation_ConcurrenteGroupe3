@@ -26,6 +26,7 @@ private:
     int id;
     QGraphicsTextItem *orderPopup;
     QString imagePath;
+    QPointF initialPosition; // Position initiale du client
 };
 
 #endif // CLIENT_H
