@@ -1,19 +1,29 @@
 #include "cookercontroller.h"
 
-#include <iostream>
+CookerController::CookerController(CommandController *commandController)
+    : commandController(commandController) {}
 
-void CookerController::prepareStep() {
-    std::cout << "Cooker is preparing a step of the recipe..." << std::endl;
+CookerController::~CookerController() {}
+
+QString CookerController::prepareDish(int commandId, int menuId) {
+    // Récupérer la commande
+    Command *command = commandController->findCommandById(commandId);
+
+    if (!command) {
+        return QString("Command ID %1 not found!").arg(commandId);
+    }
+
+
+    return QString("Dish ID %1 not found in Command ID %2.").arg(menuId).arg(commandId);
 }
 
-void CookerController::depositCommand(Command* command) {
-    std::cout << "Cooker is depositing a completed command." << std::endl;
-}
+QString CookerController::listDishesInCommand(int commandId) const {
+    // Récupérer la commande
+    Command *command = commandController->findCommandById(commandId);
 
-void CookerController::takeIngredient() {
-    std::cout << "Cooker is taking an ingredient." << std::endl;
-}
+    if (!command) {
+        return QString("Command ID %1 not found!").arg(commandId);
+    }
 
-void CookerController::run() {
-    std::cout << "Cooker is running the recipe process." << std::endl;
+
 }

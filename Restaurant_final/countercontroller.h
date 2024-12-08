@@ -1,17 +1,20 @@
-#ifndef COUNTER_H
-#define COUNTER_H
+#ifndef COUNTERCONTROLLER_H
+#define COUNTERCONTROLLER_H
 
-#include "Command.h"
+#include "commandcontroller.h"
 #include "Counter.h"
+#include <QString>
 
-class Counter {
-private:
-    int readyDish;
-    Command* commands;
-
+class CounterController {
 public:
-    void listenCommands();
-    void sendCommand(Command* command);
+    CounterController(CommandController *commandController);
+    ~CounterController();
+
+    QString processCommand(int commandId);
+    QString listPendingCommands() const;
+
+private:
+    CommandController *commandController; // Référence au gestionnaire des commandes
 };
 
-#endif // COUNTER_H
+#endif // COUNTERCONTROLLER_H

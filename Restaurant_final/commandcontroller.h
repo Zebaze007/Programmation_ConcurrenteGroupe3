@@ -1,20 +1,22 @@
 #ifndef COMMANDCONTROLLER_H
 #define COMMANDCONTROLLER_H
 
-#include "Command.h"
-#include <vector>
+#include "command.h"
+#include <QVector>
 
 class CommandController {
-private:
-    std::vector<Command> commands; // Liste des commandes
-
 public:
     CommandController();
     ~CommandController();
 
-    void addCommand(Command command);  // Ajouter une nouvelle commande
-    void executeCommand(int commandId); // Exécuter une commande par ID
-    void updateCommandStatus(int commandId, bool status); // Met à jour le statut
+    void addCommand(Command *command);
+    void removeCommand(int id);
+    Command* findCommandById(int id) const;
+    QVector<Command*> getAllCommands() const;
+    QString displayAllCommands() const;
+
+private:
+    QVector<Command*> commands; // Liste des commandes
 };
 
 #endif // COMMANDCONTROLLER_H

@@ -1,18 +1,18 @@
-#include "CookChiefController.h"
-#include <iostream>
+#include "cookchiefcontroller.h"
 
-void CookChief::giveTasks() {
-    std::cout << "CookChief is assigning tasks to cookers." << std::endl;
+CookChiefController::CookChiefController(MenuController *menuController, CounterController *counterController)
+    : menuController(menuController), counterController(counterController) {}
+
+CookChiefController::~CookChiefController() {}
+
+QString CookChiefController::prepareCommand(int commandId) {
+    // Récupérer les informations sur la commande
+    QString commandDetails = counterController->processCommand(commandId);
+
+    if (commandDetails.startsWith("Command ID")) { // La commande a été trouvée
+        return QString("Chef is preparing:\n") + commandDetails;
+    }
+
+    return QString("Command ID %1 could not be prepared.").arg(commandId);
 }
 
-void CookChief::divideTasks(const std::string& task) {
-    std::cout << "CookChief is dividing task: " << task << std::endl;
-}
-
-void CookChief::updateStock() {
-    std::cout << "CookChief is updating the stock." << std::endl;
-}
-
-void CookChief::createStock() {
-    std::cout << "CookChief is creating new stock." << std::endl;
-}

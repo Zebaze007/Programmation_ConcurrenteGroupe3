@@ -1,14 +1,34 @@
-#include "Menu.h"
-//#include "Dish.h"
+#include "menu.h"
 
-//void Menu::disableDish(Dish* dish) {
-//    dish->setReady(false);
-//}
+Menu::Menu(int id, const QString &name, double price, const QString &description)
+    : id(id), name(name), price(price), description(description) {}
 
-//void Menu::buildMenu() {
-    // Logique pour construire le menu
-//}
+Menu::~Menu() {}
 
-//void Menu::enableDish(Dish* dish) {
-//    dish->setReady(true);
-//}
+int Menu::getId() const {
+    return id;
+}
+
+QString Menu::getName() const {
+    return name;
+}
+
+double Menu::getPrice() const {
+    return price;
+}
+
+QString Menu::getDescription() const {
+    return description;
+}
+
+void Menu::setName(const QString &name) {
+    this->name = name;
+}
+
+void Menu::setPrice(double price) {
+    this->price = price;
+}
+
+void Menu::setDescription(const QString &description) {
+    this->description = description;
+}

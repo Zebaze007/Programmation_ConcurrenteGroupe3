@@ -1,20 +1,21 @@
-#ifndef COOKCHIEF_H
-#define COOKCHIEF_H
+#ifndef COOKCHIEFCONTROLLER_H
+#define COOKCHIEFCONTROLLER_H
 
-#include <string>
-#include "Menu.h"
-#include "counter.h"
+#include "menucontroller.h"
+#include "countercontroller.h"
+#include <QString>
 
-class CookChief {
-private:
-    Menu menu;
-    Counter* dishCounter;
-
+class CookChiefController {
 public:
-    void giveTasks();
-    void divideTasks(const std::string& task);
-    void updateStock();
-    void createStock();
+    CookChiefController(MenuController *menuController, CounterController *counterController);
+    ~CookChiefController();
+
+    QString prepareCommand(int commandId);
+    QString listAvailableDishes() const;
+
+private:
+    MenuController *menuController;         // Gestionnaire des plats
+    CounterController *counterController;   // Gestionnaire des commandes
 };
 
-#endif // COOKCHIEF_H
+#endif // COOKCHIEFCONTROLLER_H

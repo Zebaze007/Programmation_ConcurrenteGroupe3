@@ -1,10 +1,28 @@
 #include "countercontroller.h"
-#include <iostream>
 
-void Counter::listenCommands() {
-    std::cout << "Counter is listening for new commands." << std::endl;
+CounterController::CounterController(CommandController *commandController)
+    : commandController(commandController) {}
+
+CounterController::~CounterController() {}
+
+QString CounterController::processCommand(int commandId) {
+    Command *command = commandController->findCommandById(commandId);
+
+    if (!command) {
+        return QString("Command ID %1 not found!").arg(commandId);
+    }
+
+    // Exemple de traitement (vous pouvez personnaliser cette logique)
+    QString result = QString("Processing Command ID %1:\n").arg(commandId);
+    result += command->displayCommandDetails();
+    result += "Command has been processed.\n";
+
+    // Optionnel : supprimer la commande après traitement
+    commandController->removeCommand(commandId);
+
+    return result;
 }
 
-void Counter::sendCommand(Command* command) {
-    std::cout << "Counter is sending a command to the cookers." << std::endl;
+QString CounterController::listPendingCommands() const {
+    return commandController->displayAllCommands();
 }

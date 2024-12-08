@@ -1,15 +1,20 @@
 #ifndef COOKERCONTROLLER_H
 #define COOKERCONTROLLER_H
 
-#include "Command.h"
+#include "commandcontroller.h"
 #include "cooker.h"
+#include <QString>
 
 class CookerController {
 public:
-    void prepareStep();
-    void depositCommand(Command* command);
-    void takeIngredient();
-    void run();
+    CookerController(CommandController *commandController);
+    ~CookerController();
+
+    QString prepareDish(int commandId, int menuId);
+    QString listDishesInCommand(int commandId) const;
+
+private:
+    CommandController *commandController; // Référence au gestionnaire des commandes
 };
 
 #endif // COOKERCONTROLLER_H

@@ -17,6 +17,7 @@ SOURCES += \
     client.cpp \
     clientcontroller.cpp \
     command.cpp \
+    commandcontroller.cpp \
     cookchief.cpp \
     cookchiefcontroller.cpp \
     cooker.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
     managetools.cpp \
     materials.cpp \
     menu.cpp \
+    menucontroller.cpp \
     rankchief.cpp \
     rankchiefcontroller.cpp \
     roomclerk.cpp \
@@ -56,6 +58,7 @@ HEADERS += \
     client.h \
     clientcontroller.h \
     command.h \
+    commandcontroller.h \
     cookchief.h \
     cookchiefcontroller.h \
     cooker.h \
@@ -72,6 +75,7 @@ HEADERS += \
     managetools.h \
     materials.h \
     menu.h \
+    menucontroller.h \
     rankchief.h \
     rankchiefcontroller.h \
     roomclerk.h \

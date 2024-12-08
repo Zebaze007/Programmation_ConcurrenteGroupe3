@@ -1,27 +1,45 @@
-#include "CommandController.h"
+#include "commandcontroller.h"
 
 CommandController::CommandController() {}
 
-CommandController::~CommandController() {}
-
-void CommandController::addCommand(Command command) {
-    commands.push_back(command); // Ajouter la commande à la liste
+CommandController::~CommandController() {
+    for (Command *command : commands) {
+        delete command;
+    }
+    commands.clear();
 }
 
-void CommandController::executeCommand(int commandId) {
-    for (auto& command : commands) {
-        if (command.getId() == commandId) {
-            command.setReady(true); // Marquer comme prête
+void CommandController::addCommand(Command *command) {
+    commands.append(command);
+}
+
+void CommandController::removeCommand(int id) {
+    for (int i = 0; i < commands.size(); ++i) {
+        if (commands[i]->getId() == id) {
+            delete commands[i];
+            commands.removeAt(i);
             break;
         }
     }
 }
 
-void CommandController::updateCommandStatus(int commandId, bool status) {
-    for (auto& command : commands) {
-        if (command.getId() == commandId) {
-            command.setReady(status); // Mettre à jour le statut
-            break;
+Command* CommandController::findCommandById(int id) const {
+    for (Command *command : commands) {
+        if (command->getId() == id) {
+            return command;
         }
     }
+    return nullptr;
+}
+
+QVector<Command*> CommandController::getAllCommands() const {
+    return commands;
+}
+
+QString CommandController::displayAllCommands() const {
+    QString allCommands;
+    for (Command *command : commands) {
+        allCommands += command->displayCommandDetails() + "\n";
+    }
+    return allCommands;
 }

@@ -1,28 +1,48 @@
-#include "Command.h"
+#include "command.h"
 
-Command::Command(int id, const std::vector<Dish*>& dishes, bool ready)
-    : id(id), dishes(dishes), ready(ready) {}
+Command::Command(int id, int clientId, const QVector<Menu*> &orderedItems)
+    : id(id), clientId(clientId), orderedItems(orderedItems) {}
+
+Command::~Command() {}
 
 int Command::getId() const {
     return id;
 }
 
-void Command::setId(int value) {
-    id = value;
+int Command::getClientId() const {
+    return clientId;
 }
 
-const std::vector<Dish*>& Command::getDishes() const {
-    return dishes;
+QVector<Menu*> Command::getOrderedItems() const {
+    return orderedItems;
 }
 
-void Command::setDishes(const std::vector<Dish*>& value) {
-    dishes = value;
+double Command::calculateTotalPrice() const {
+    double total = 0.0;
+    for (Menu *item : orderedItems) {
+        total += item->getPrice();
+    }
+    return total;
 }
 
-bool Command::isReady() const {
-    return ready;
+QString Command::displayCommandDetails() const {
+    QString details = QString("Command ID: %1\nClient ID: %2\n").arg(id).arg(clientId);
+    for (Menu *item : orderedItems) {
+        details += QString("- %1 ($%2)\n").arg(item->getName()).arg(item->getPrice());
+    }
+    details += QString("Total Price: $%1\n").arg(calculateTotalPrice());
+    return details;
 }
 
-void Command::setReady(bool value) {
-    ready = value;
+void Command::addItem(Menu *item) {
+    orderedItems.append(item);
+}
+
+void Command::removeItem(int menuItemId) {
+    for (int i = 0; i < orderedItems.size(); ++i) {
+        if (orderedItems[i]->getId() == menuItemId) {
+            orderedItems.removeAt(i);
+            break;
+        }
+    }
 }
