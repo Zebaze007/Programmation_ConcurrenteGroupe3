@@ -57,9 +57,11 @@ private slots:
     void onStartButtonClicked();       // Bouton Démarrer
     void onPauseButtonClicked();       // Bouton Pause
     void onStopButtonClicked();        // Bouton Stopper
+    void onTakeOrderButtonClicked();
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
     void moveClients();
-     void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
+    void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
+    void moveRankChiefInLoop(QPoint &start, QPoint &end, int speed);
 
 
 private:
@@ -145,17 +147,21 @@ private:
     QPoint startPosition1, endPosition1;
     QPoint startPosition2, endPosition2;
     QPoint startPosition3, endPosition3;
+    QPoint startPositionRankChief;
+    QPoint endPositionRankChief;
 
     // Timers pour chaque client
     QTimer *timerClient;
     QTimer *timerClient2;
     QTimer *timerClient3;
+    QTimer *timerRankChief;
 
 
     // Indicateurs pour savoir si les clients sont en mouvement
     bool isReturningClient = false;
     bool isReturningClient2 = false;
     bool isReturningClient3 = false;
+    bool isRankChiefMoving;
 
 
     void startClientMovement();  // Démarrer le mouvement des clients
