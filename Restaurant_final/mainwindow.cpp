@@ -419,8 +419,8 @@ MainWindow::MainWindow(QWidget *parent)
     endPosition3 = QPoint(115, 540);
 
 
-    startPositionRankChief = QPoint(400, 400);
-    endPositionRankChief = QPoint(100, 500);
+    rankChiefStartPosition = QPoint(400, 400);
+    rankChiefEndPosition= QPoint(100, 500);
 
 
 
@@ -485,23 +485,7 @@ void MainWindow::moveClients()
 
 
 
-void MainWindow::onTakeOrderButtonClicked()
-{
-    qDebug() << "Bouton Prendre la commande cliqué.";
 
-    // Si le rankChief est déjà en mouvement, ne rien faire
-    if (isRankChiefMoving) {
-        qDebug() << "RankChief est déjà en mouvement.";
-        return;
-    }
-
-    // Définir le flag et démarrer le timer pour le mouvement
-    isRankChiefMoving = true;
-    connect(timerRankChief, &QTimer::timeout, this, [this]() {
-        moveRankChiefInLoop(startPositionRankChief, endPositionRankChief, 10);
-    });
-    timerRankChief->start(50); // Intervalle de mise à jour rapide pour un mouvement fluide
-}
 
 void MainWindow::moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed)
 {
@@ -531,6 +515,34 @@ void MainWindow::moveClientInLoop(Client *client, QPoint &start, QPoint &end, in
     }
 }
 
+void MainWindow::moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du RankChief
+    QPoint currentPosition = rankChief->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le RankChief n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le RankChief par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        rankChief->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le RankChief atteint la destination, inverser les points de départ et de fin
+        rankChief->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
 // Slot pour le bouton Démarrer
 void MainWindow::onStartButtonClicked()
 {
@@ -551,6 +563,7 @@ void MainWindow::onPauseButtonClicked()
     timerClient->stop();
     timerClient2->stop();
     timerClient3->stop();
+    timerRankChief->stop();
 }
 
 // Slot pour le bouton Stopper
@@ -566,11 +579,13 @@ void MainWindow::onStopButtonClicked()
     timerClient->stop();
     timerClient2->stop();
     timerClient3->stop();
+    timerRankChief->stop();
 
     // Réinitialise l'état des flags de retour
     isReturningClient = false;
     isReturningClient2 = false;
     isReturningClient3 = false;
+    isReturningRankChief = false;
 
 
 
@@ -590,36 +605,15 @@ void MainWindow::onStopButtonClicked()
     rankChief2->setPosition(400, 150, 100.0);
 
 }
-
-
-void MainWindow::moveRankChiefInLoop(QPoint &start, QPoint &end, int speed)
+void MainWindow::onTakeOrderButtonClicked()
 {
-    QPoint currentPosition = rankChief->getGraphicsItem()->pos().toPoint();
+    qDebug() << "Bouton Prendre la commande cliqué.";
 
-    int deltaX = end.x() - currentPosition.x();
-    int deltaY = end.y() - currentPosition.y();
+    // Démarrer le timer pour le RankChief
+    timerRankChief = new QTimer(this);
+    connect(timerRankChief, &QTimer::timeout, [this]() {
+        moveRankChiefInLoop(rankChief, rankChiefStartPosition, rankChiefEndPosition, 10);
+    });
 
-    if (abs(deltaX) > speed || abs(deltaY) > speed) {
-        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
-        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
-
-        int newX = currentPosition.x() + stepX;
-        int newY = currentPosition.y() + stepY;
-
-        rankChief->setPosition(newX, newY, 100.0);
-    } else {
-        // Une fois arrivé, inverser les positions et arrêter le mouvement
-        rankChief->setPosition(end.x(), end.y(), 100.0);
-        QPoint temp = start;
-        start = end;
-        end = temp;
-
-        // Si le `rankChief` revient à son point de départ, arrêter le déplacement
-        if (currentPosition == start) {
-            timerRankChief->stop();
-            isRankChiefMoving = false;
-            qDebug() << "RankChief a terminé son déplacement.";
-        }
-    }
+    timerRankChief->start(100); // Mise à jour toutes les 100 ms
 }
-

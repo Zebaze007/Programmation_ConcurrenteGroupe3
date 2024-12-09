@@ -61,7 +61,7 @@ private slots:
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
     void moveClients();
     void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
-    void moveRankChiefInLoop(QPoint &start, QPoint &end, int speed);
+    void moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint &end, int speed);
 
 
 private:
@@ -147,8 +147,8 @@ private:
     QPoint startPosition1, endPosition1;
     QPoint startPosition2, endPosition2;
     QPoint startPosition3, endPosition3;
-    QPoint startPositionRankChief;
-    QPoint endPositionRankChief;
+    QPoint rankChiefStartPosition;
+    QPoint rankChiefEndPosition;
 
     // Timers pour chaque client
     QTimer *timerClient;
@@ -157,11 +157,13 @@ private:
     QTimer *timerRankChief;
 
 
+
     // Indicateurs pour savoir si les clients sont en mouvement
     bool isReturningClient = false;
     bool isReturningClient2 = false;
     bool isReturningClient3 = false;
-    bool isRankChiefMoving;
+    bool isReturningRankChief = false;
+
 
 
     void startClientMovement();  // Démarrer le mouvement des clients
