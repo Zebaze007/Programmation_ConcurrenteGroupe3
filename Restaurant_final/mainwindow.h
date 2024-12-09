@@ -1,3 +1,4 @@
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -58,6 +59,7 @@ private slots:
     void onPauseButtonClicked();       // Bouton Pause
     void onStopButtonClicked();        // Bouton Stopper
     void onTakeOrderButtonClicked();
+    void onServeFoodButtonClicked();
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
     void moveClients();
     void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
@@ -149,12 +151,17 @@ private:
     QPoint startPosition3, endPosition3;
     QPoint rankChiefStartPosition;
     QPoint rankChiefEndPosition;
+    QPoint serverStartPosition; // Position initiale
+    QPoint serverCounterPosition; // Position du comptoir
+    QPoint serverTablePosition; // Position de la table
+
 
     // Timers pour chaque client
     QTimer *timerClient;
     QTimer *timerClient2;
     QTimer *timerClient3;
     QTimer *timerRankChief;
+    QTimer *timerServer;
 
 
 
@@ -163,6 +170,7 @@ private:
     bool isReturningClient2 = false;
     bool isReturningClient3 = false;
     bool isReturningRankChief = false;
+    bool isReturningServer = false;
 
 
 
@@ -170,6 +178,9 @@ private:
 
     // Méthode pour déplacer un client entre deux points
     void moveClientInLoop(Client *client, const QPoint &start, const QPoint &end, int speed);
+
+    void moveServerInLoop(Server *server, QPoint &start, QPoint &end, int speed);
+
 };
 
 #endif // MAINWINDOW_H

@@ -183,7 +183,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         // Ajoutez la chaise à la scène
         sceneDiningArea->addItem(chair->getGraphicsItem());
-      }
+    }
 
     for (int i = 0; i < 8; ++i) { // Ajoutons 4 chaises
         Chair *chair5 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaiseP1.png", i + 1, this);
@@ -276,22 +276,22 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
-          Chair *chair2 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
-          chairs.append(chair2);
+        Chair *chair2 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
+        chairs.append(chair2);
 
-          // Positionnez chaque chaise autour de la table
-          switch (i) {
-          case 0: chair2->setPosition(65, 105, 100.0); break; // En haut
-          case 1: chair2->setPosition(135, 105, 100.0); break; // En bas
-          case 2: chair2->setPosition(280, 105, 100.0); break; // À gauche
-          case 3: chair2->setPosition(320, 105, 100.0); break; // À droite
-          case 4: chair2->setPosition(480, 105, 100.0); break; // En haut
-          case 5: chair2->setPosition(520, 105, 100.0); break; // En bas
-          }
+        // Positionnez chaque chaise autour de la table
+        switch (i) {
+        case 0: chair2->setPosition(65, 105, 100.0); break; // En haut
+        case 1: chair2->setPosition(135, 105, 100.0); break; // En bas
+        case 2: chair2->setPosition(280, 105, 100.0); break; // À gauche
+        case 3: chair2->setPosition(320, 105, 100.0); break; // À droite
+        case 4: chair2->setPosition(480, 105, 100.0); break; // En haut
+        case 5: chair2->setPosition(520, 105, 100.0); break; // En bas
+        }
 
-          // Ajoutez la chaise à la scène
-          sceneDiningArea->addItem(chair2->getGraphicsItem());
-      }
+        // Ajoutez la chaise à la scène
+        sceneDiningArea->addItem(chair2->getGraphicsItem());
+    }
 
     for (int i = 0; i < 6; ++i) { // Ajoutons 4 chaises
         Chair *chair3 = new Chair(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chaise.png", i + 1, this);
@@ -400,6 +400,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pauseButton, &QPushButton::clicked, this, &MainWindow::onPauseButtonClicked);
     connect(ui->stopButton, &QPushButton::clicked, this, &MainWindow::onStopButtonClicked);
     connect(ui->takeOrderButton, &QPushButton::clicked, this, &MainWindow::onTakeOrderButtonClicked);
+    connect(ui->serveFoodButton, &QPushButton::clicked, this, &MainWindow::onServeFoodButtonClicked);
 
 
     // Connectez le timer à la mise à jour du temps et des déplacements
@@ -423,27 +424,13 @@ MainWindow::MainWindow(QWidget *parent)
     rankChiefEndPosition= QPoint(100, 500);
 
 
+    // Positions du serveur
+    serverStartPosition = QPoint(100, 150);  // Position initiale
+    serverCounterPosition = QPoint(500, 300); // Position du comptoir
+    serverTablePosition = QPoint(500, 25);   // Position de la table
 
 
 }
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete timer;
-
-}
-
-
-// Mise à jour de l'affichage du temps
-void MainWindow::updateTimeDisplay()
-{
-    elapsedSeconds++;
-    ui->timeButton->setText(QString("Time: %1s").arg(elapsedSeconds));
-}
-
-
-
 
 void MainWindow::startClientMovement()
 {
@@ -543,6 +530,108 @@ void MainWindow::moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint
     }
 }
 
+void MainWindow::moveServerInLoop(Server *server, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du serveur
+    QPoint currentPosition = server->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le serveur n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le serveur par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        server->setPosition(newX, newY, 70.0); // Déplacer le serveur
+    } else {
+        // Une fois que le serveur atteint la destination, inverser les points de départ et de fin
+        server->setPosition(end.x(), end.y(), 70.0);
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+void MainWindow::onServeFoodButtonClicked()
+{
+    qDebug() << "Bouton Servir la nourriture cliqué.";
+
+    timerServer = new QTimer(this);
+    connect(timerServer, &QTimer::timeout, [this]() {
+        static int phase = 0; // Phase de déplacement : 0 = vers comptoir, 1 = vers table, 2 = retour initial
+
+        if (phase == 0) {
+            moveServerInLoop(server1, serverStartPosition, serverCounterPosition, 10); // Déplacer vers le comptoir
+            if (server1->getGraphicsItem()->pos() == serverCounterPosition) {
+                phase = 1; // Passer à la phase suivante
+            }
+        } else if (phase == 1) {
+            moveServerInLoop(server1, serverCounterPosition, serverTablePosition, 10); // Déplacer vers la table
+            if (server1->getGraphicsItem()->pos() == serverTablePosition) {
+                phase = 2; // Passer à la phase suivante
+            }
+        } else if (phase == 2) {
+            moveServerInLoop(server1, serverTablePosition, serverStartPosition, 10); // Retour à la position initiale
+            if (server1->getGraphicsItem()->pos() == serverStartPosition) {
+                timerServer->stop(); // Arrêter le mouvement
+                phase = 0; // Réinitialiser la phase pour la prochaine utilisation
+            }
+        }
+    });
+
+    timerServer->start(1000); // Mise à jour toutes les 100 ms
+}
+
+
+void MainWindow::onTakeOrderButtonClicked()
+{
+    qDebug() << "Bouton Prendre la commande cliqué.";
+
+    // Démarrer le timer pour le RankChief
+    timerRankChief = new QTimer(this);
+    connect(timerRankChief, &QTimer::timeout, [this]() {
+        moveRankChiefInLoop(rankChief, rankChiefStartPosition, rankChiefEndPosition, 10);
+    });
+
+    timerRankChief->start(1000); // Mise à jour toutes les 100 ms
+}
+
+
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+    delete timer;
+    delete timerClient;
+    delete timerClient2;
+    delete timerClient3;
+    delete timerRankChief;
+    delete timerServer;
+
+
+}
+
+
+// Mise à jour de l'affichage du temps
+void MainWindow::updateTimeDisplay()
+{
+    elapsedSeconds++;
+    ui->timeButton->setText(QString("Time: %1s").arg(elapsedSeconds));
+}
+
+
+
+
+
+
+
+
 // Slot pour le bouton Démarrer
 void MainWindow::onStartButtonClicked()
 {
@@ -560,11 +649,13 @@ void MainWindow::onPauseButtonClicked()
     timer->stop(); // Arrête temporairement le timer
 
     // Arrêter les timers des clients pour stopper leur retour temporairement
-    timerClient->stop();
-    timerClient2->stop();
-    timerClient3->stop();
-    timerRankChief->stop();
+    if (timerClient) timerClient->stop();
+    if (timerClient2) timerClient2->stop();
+    if (timerClient3) timerClient3->stop();
+    if (timerRankChief) timerRankChief->stop();
+    if (timerServer) timerServer->stop();
 }
+
 
 // Slot pour le bouton Stopper
 void MainWindow::onStopButtonClicked()
@@ -575,17 +666,20 @@ void MainWindow::onStopButtonClicked()
     ui->timeButton->setText("Time: 0s"); // Réinitialise l'affichage
 
     // Arrête tous les timers
-    timer->stop();
-    timerClient->stop();
-    timerClient2->stop();
-    timerClient3->stop();
-    timerRankChief->stop();
+    if (timer) timer->stop();
+    if (timerClient) timerClient->stop();
+    if (timerClient2) timerClient2->stop();
+    if (timerClient3) timerClient3->stop();
+    if (timerRankChief) timerRankChief->stop();
+    if (timerServer) timerServer->stop();
+
 
     // Réinitialise l'état des flags de retour
     isReturningClient = false;
     isReturningClient2 = false;
     isReturningClient3 = false;
     isReturningRankChief = false;
+    isReturningServer = false;
 
 
 
@@ -605,15 +699,5 @@ void MainWindow::onStopButtonClicked()
     rankChief2->setPosition(400, 150, 100.0);
 
 }
-void MainWindow::onTakeOrderButtonClicked()
-{
-    qDebug() << "Bouton Prendre la commande cliqué.";
 
-    // Démarrer le timer pour le RankChief
-    timerRankChief = new QTimer(this);
-    connect(timerRankChief, &QTimer::timeout, [this]() {
-        moveRankChiefInLoop(rankChief, rankChiefStartPosition, rankChiefEndPosition, 10);
-    });
 
-    timerRankChief->start(100); // Mise à jour toutes les 100 ms
-}
