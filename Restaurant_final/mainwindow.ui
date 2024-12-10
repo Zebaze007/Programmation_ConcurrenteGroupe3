@@ -45,6 +45,13 @@
          </property>
         </widget>
        </item>
+	   <item>
+        <widget class="QPushButton" name="speedButton">
+         <property name="text">
+          <string>Accélérer</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -215,7 +222,7 @@ image: url(:/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso6.jpg);
           <item>
            <widget class="QPushButton" name="customerMoodButton">
             <property name="text">
-             <string>Humeur des clients 😊</string>
+             <string>Dashboard</string>
             </property>
            </widget>
           </item>
@@ -376,8 +383,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="source_externe.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

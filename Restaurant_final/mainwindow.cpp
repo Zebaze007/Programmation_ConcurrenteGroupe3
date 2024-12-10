@@ -402,6 +402,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->takeOrderButton, &QPushButton::clicked, this, &MainWindow::onTakeOrderButtonClicked);
     connect(ui->serveFoodButton, &QPushButton::clicked, this, &MainWindow::onServeFoodButtonClicked);
     connect(ui->clearTableButton, &QPushButton::clicked, this, &MainWindow::onClearTableButtonClicked);
+    connect(ui->speedButton, &QPushButton::clicked, this, &MainWindow::onSpeedButtonClicked);
 
 
 
@@ -423,7 +424,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     rankChiefStartPosition = QPoint(400, 400);
-    rankChiefEndPosition= QPoint(100, 500);
+    rankChiefEndPosition= QPoint(150, 520);
 
 
     // Positions du serveur
@@ -440,6 +441,15 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::startClientMovement()
 {
     qDebug() << "Mouvement des clients démarré.";
+
+    // Check if the current time is at least 10:00 AM
+    int currentHour = 8 + (elapsedSeconds / 60); // Calculate hour based on elapsedSeconds
+    currentHour = currentHour % 24; // Ensure the hour wraps correctly in a 24-hour format
+
+    if (currentHour < 10) {
+        qDebug() << "Mouvement des clients retardé. Actuellement avant 10:00 AM.";
+        return; // Exit without starting movement
+    }
 
     // Démarre les timers pour animer les déplacements des clients
     timerClient = new QTimer(this);
@@ -464,7 +474,10 @@ void MainWindow::startClientMovement()
     timerClient->start(5000);  // Délai avant le retour pour client 1
     timerClient2->start(7000); // Délai avant le retour pour client 2
     timerClient3->start(8000); // Délai avant le retour pour client 3
+
+    qDebug() << "Mouvement des clients initialisé à partir de 10:00 AM.";
 }
+
 
 
 void MainWindow::moveClients()
@@ -617,6 +630,47 @@ void MainWindow::onTakeOrderButtonClicked()
 
     timerRankChief->start(1000); // Mise à jour toutes les 100 ms
 }
+void MainWindow::hideDiningRoomElements()
+{
+    // Hide all customers
+    client->getGraphicsItem()->hide();
+    client2->getGraphicsItem()->hide();
+    client3->getGraphicsItem()->hide();
+    client4->getGraphicsItem()->hide();
+    client5->getGraphicsItem()->hide();
+    client6->getGraphicsItem()->hide();
+    client7->getGraphicsItem()->hide();
+     client8->getGraphicsItem()->hide();
+    client9->getGraphicsItem()->hide();
+    client10->getGraphicsItem()->hide();
+    client11->getGraphicsItem()->hide();
+    client12->getGraphicsItem()->hide();
+    dish->getGraphicsItem()->hide();
+    dish2->getGraphicsItem()->hide();
+
+
+}
+
+void MainWindow::showDiningRoomElements()
+{
+    // Show all customers
+    client->getGraphicsItem()->show();
+    client2->getGraphicsItem()->show();
+    client3->getGraphicsItem()->show();
+    client4->getGraphicsItem()->show();
+    client5->getGraphicsItem()->show();
+    client6->getGraphicsItem()->show();
+    client7->getGraphicsItem()->show();
+    client8->getGraphicsItem()->show();
+    client9->getGraphicsItem()->show();
+    client10->getGraphicsItem()->show();
+    client11->getGraphicsItem()->show();
+    client12->getGraphicsItem()->show();
+    dish->getGraphicsItem()->show();
+    dish2->getGraphicsItem()->show();
+
+}
+
 
 
 
@@ -637,12 +691,40 @@ MainWindow::~MainWindow()
 // Mise à jour de l'affichage du temps
 void MainWindow::updateTimeDisplay()
 {
+    // Increment elapsed time by 1 second regularly
     elapsedSeconds++;
-    ui->timeButton->setText(QString("Time: %1s").arg(elapsedSeconds));
+
+    // Calculate hours and minutes as before
+    int hours = 8 + (elapsedSeconds / 60); // 1 "hour" = 60 seconds
+    int minutes = (elapsedSeconds % 60);
+    hours = hours % 24;
+
+    // Format and display the time
+    ui->timeButton->setText(QString("Time: %1:%2")
+                                .arg(hours, 2, 10, QChar('0'))
+                                .arg(minutes, 2, 10, QChar('0')));
+
+    // Check if it's between 8:00 and 10:00
+    if (hours >= 8 && hours < 10) {
+        hideDiningRoomElements(); // Hide staff and customers
+    } else {
+        showDiningRoomElements(); // Show staff and customers outside this period
+        // Check and start client movement at 10:00 AM
+        if (hours == 10 && minutes == 0) {
+            startClientMovement();
+        }
+    }
 }
+void MainWindow::onSpeedButtonClicked()
+{
+    qDebug() << "Acceleration button clicked.";
 
+    // Increase elapsed time by 10 seconds
+    elapsedSeconds += 10;
 
-
+    // Ensure time is updated immediately after the increment
+    updateTimeDisplay();
+}
 
 
 
@@ -652,24 +734,81 @@ void MainWindow::updateTimeDisplay()
 void MainWindow::onStartButtonClicked()
 {
     qDebug() << "Bouton Démarrer cliqué.";
-    timer->start(1000); // Démarre le timer pour mises à jour toutes les 1000ms (1 seconde)
 
-    // Démarre les timers spécifiques pour le mouvement des clients
-    startClientMovement();
+    // Start the main timer if not already active
+    if (!timer->isActive()) {
+        timer->start(1000); // Update every 1 second
+    }
+
+    // Resume client movement timers based on their previous states
+    if (isTimerClientActive && timerClient && !timerClient->isActive()) {
+        timerClient->start(5000);
+    }
+
+    if (isTimerClient2Active && timerClient2 && !timerClient2->isActive()) {
+        timerClient2->start(7000);
+    }
+
+    if (isTimerClient3Active && timerClient3 && !timerClient3->isActive()) {
+        timerClient3->start(8000);
+    }
+
+    // Resume RankChief and Server timers
+    if (isTimerRankChiefActive && timerRankChief && !timerRankChief->isActive()) {
+        timerRankChief->start(1000);
+    }
+
+    if (isTimerServerActive && timerServer && !timerServer->isActive()) {
+        timerServer->start(1000);
+    }
+
+    qDebug() << "Tous les mouvements reprennent.";
 }
+
 
 // Slot pour le bouton Pause
 void MainWindow::onPauseButtonClicked()
 {
     qDebug() << "Bouton Pause cliqué.";
-    timer->stop(); // Arrête temporairement le timer
 
-    // Arrêter les timers des clients pour stopper leur retour temporairement
-    if (timerClient) timerClient->stop();
-    if (timerClient2) timerClient2->stop();
-    if (timerClient3) timerClient3->stop();
-    if (timerRankChief) timerRankChief->stop();
-    if (timerServer) timerServer->stop();
+    // Vérifier et sauvegarder l'état des timers
+    if (timerClient && timerClient->isActive()) {
+        isTimerClientActive = true;
+        timerClient->stop();
+    } else {
+        isTimerClientActive = false;
+    }
+
+    if (timerClient2 && timerClient2->isActive()) {
+        isTimerClient2Active = true;
+        timerClient2->stop();
+    } else {
+        isTimerClient2Active = false;
+    }
+
+    if (timerClient3 && timerClient3->isActive()) {
+        isTimerClient3Active = true;
+        timerClient3->stop();
+    } else {
+        isTimerClient3Active = false;
+    }
+
+    if (timerRankChief && timerRankChief->isActive()) {
+        isTimerRankChiefActive = true;
+        timerRankChief->stop();
+    } else {
+        isTimerRankChiefActive = false;
+    }
+
+    if (timerServer && timerServer->isActive()) {
+        isTimerServerActive = true;
+        timerServer->stop();
+    } else {
+        isTimerServerActive = false;
+    }
+
+    // Arrêter le timer principal
+    timer->stop();
 }
 
 

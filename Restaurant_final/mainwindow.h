@@ -65,6 +65,8 @@ private slots:
     void moveClientOnce(Client *client, QPoint &start, QPoint &end, int speed);
     void moveRankChiefOnce(RankChief *rankChief, QPoint &start, QPoint &end, int speed);
     void onClearTableButtonClicked();
+    void onSpeedButtonClicked(); // Slot for the Accelerate button
+
 
 private:
     Ui::MainWindow *ui;
@@ -173,15 +175,24 @@ private:
     bool isReturningClient3 = false;
     bool isReturningRankChief = false;
     bool isReturningServer = false;
+    bool isTimerClientActive = false;
+    bool isTimerClient2Active = false;
+    bool isTimerClient3Active = false;
+    bool isTimerRankChiefActive = false;
+    bool isTimerServerActive = false;
+
 
 
 
     void startClientMovement();  // Démarrer le mouvement des clients
+    void moveClientWithReturn(Client *client, QPoint &start, QPoint &end, int speed);
 
     // Méthode pour déplacer un client entre deux points
     void moveClientOnce(Client *client, const QPoint &start, const QPoint &end, int speed);
 
     void moveServerOnce(Server *server, QPoint &start, QPoint &end, int speed);
+    void hideDiningRoomElements(); // Hides all clients and staff in the dining room
+    void showDiningRoomElements(); // Shows all clients and staff in the dining room
 
 };
 
