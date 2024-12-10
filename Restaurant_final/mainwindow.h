@@ -62,9 +62,9 @@ private slots:
     void onServeFoodButtonClicked();
     void updateTimeDisplay();          // Mise à jour de l'affichage du temps
     void moveClients();
-    void moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed);
-    void moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint &end, int speed);
-
+    void moveClientOnce(Client *client, QPoint &start, QPoint &end, int speed);
+    void moveRankChiefOnce(RankChief *rankChief, QPoint &start, QPoint &end, int speed);
+    void onClearTableButtonClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -154,6 +154,8 @@ private:
     QPoint serverStartPosition; // Position initiale
     QPoint serverCounterPosition; // Position du comptoir
     QPoint serverTablePosition; // Position de la table
+    QPoint serverEndPosition;
+    QPoint dishPosition;
 
 
     // Timers pour chaque client
@@ -177,9 +179,9 @@ private:
     void startClientMovement();  // Démarrer le mouvement des clients
 
     // Méthode pour déplacer un client entre deux points
-    void moveClientInLoop(Client *client, const QPoint &start, const QPoint &end, int speed);
+    void moveClientOnce(Client *client, const QPoint &start, const QPoint &end, int speed);
 
-    void moveServerInLoop(Server *server, QPoint &start, QPoint &end, int speed);
+    void moveServerOnce(Server *server, QPoint &start, QPoint &end, int speed);
 
 };
 

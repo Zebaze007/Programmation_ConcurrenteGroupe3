@@ -401,6 +401,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->stopButton, &QPushButton::clicked, this, &MainWindow::onStopButtonClicked);
     connect(ui->takeOrderButton, &QPushButton::clicked, this, &MainWindow::onTakeOrderButtonClicked);
     connect(ui->serveFoodButton, &QPushButton::clicked, this, &MainWindow::onServeFoodButtonClicked);
+    connect(ui->clearTableButton, &QPushButton::clicked, this, &MainWindow::onClearTableButtonClicked);
+
 
 
     // Connectez le timer à la mise à jour du temps et des déplacements
@@ -427,7 +429,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Positions du serveur
     serverStartPosition = QPoint(100, 150);  // Position initiale
     serverCounterPosition = QPoint(500, 300); // Position du comptoir
-    serverTablePosition = QPoint(500, 25);   // Position de la table
+    serverTablePosition = QPoint(100, 100);   // Position de la table
+
+    // Position de l'assiette sur la table
+    dishPosition = QPoint(95, 100);
 
 
 }
@@ -440,19 +445,19 @@ void MainWindow::startClientMovement()
     timerClient = new QTimer(this);
     connect(timerClient, &QTimer::timeout, [this]() {
         isReturningClient = true;
-        moveClientInLoop(client, endPosition1, startPosition1, 10); // Retour au point de départ
+        moveClientOnce(client, endPosition1, startPosition1, 10); // Retour au point de départ
     });
 
     timerClient2 = new QTimer(this);
     connect(timerClient2, &QTimer::timeout, [this]() {
         isReturningClient2 = true;
-        moveClientInLoop(client2, endPosition2, startPosition2, 10); // Retour au point de départ
+        moveClientOnce(client2, endPosition2, startPosition2, 10); // Retour au point de départ
     });
 
     timerClient3 = new QTimer(this);
     connect(timerClient3, &QTimer::timeout, [this]() {
         isReturningClient3 = true;
-        moveClientInLoop(client3, endPosition3, startPosition3, 10); // Retour au point de départ
+        moveClientOnce(client3, endPosition3, startPosition3, 10); // Retour au point de départ
     });
 
     // Initialiser le mouvement des clients
@@ -465,16 +470,16 @@ void MainWindow::startClientMovement()
 void MainWindow::moveClients()
 {
     // Déplacer chaque client d'un point à l'autre
-    moveClientInLoop(client, startPosition1, endPosition1, 10);
-    moveClientInLoop(client2, startPosition2, endPosition2, 10);
-    moveClientInLoop(client3, startPosition3, endPosition3, 10);
+    moveClientOnce(client, startPosition1, endPosition1, 10);
+    moveClientOnce(client2, startPosition2, endPosition2, 10);
+    moveClientOnce(client3, startPosition3, endPosition3, 10);
 }
 
 
 
 
 
-void MainWindow::moveClientInLoop(Client *client, QPoint &start, QPoint &end, int speed)
+void MainWindow::moveClientOnce(Client *client, QPoint &start, QPoint &end, int speed)
 {
     // Obtenir la position actuelle du client
     QPoint currentPosition = client->getGraphicsItem()->pos().toPoint();
@@ -494,15 +499,13 @@ void MainWindow::moveClientInLoop(Client *client, QPoint &start, QPoint &end, in
 
         client->setPosition(newX, newY, 100.0);
     } else {
-        // Une fois que le client atteint la destination, inverser les points de départ et de fin
-        client->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
-        QPoint temp = start;
-        start = end;
-        end = temp; // Inversion pour le retour
+        // Une fois que le client atteint la destination finale, aligner sa position exacte
+        client->setPosition(end.x(), end.y(), 100.0);
     }
 }
 
-void MainWindow::moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint &end, int speed)
+
+void MainWindow::moveRankChiefOnce(RankChief *rankChief, QPoint &start, QPoint &end, int speed)
 {
     // Obtenir la position actuelle du RankChief
     QPoint currentPosition = rankChief->getGraphicsItem()->pos().toPoint();
@@ -522,15 +525,13 @@ void MainWindow::moveRankChiefInLoop(RankChief *rankChief, QPoint &start, QPoint
 
         rankChief->setPosition(newX, newY, 100.0);
     } else {
-        // Une fois que le RankChief atteint la destination, inverser les points de départ et de fin
-        rankChief->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
-        QPoint temp = start;
-        start = end;
-        end = temp; // Inversion pour le retour
+        // Une fois que le RankChief atteint la destination, aligner parfaitement la position
+        rankChief->setPosition(end.x(), end.y(), 100.0);
     }
 }
 
-void MainWindow::moveServerInLoop(Server *server, QPoint &start, QPoint &end, int speed)
+
+void MainWindow::moveServerOnce(Server *server, QPoint &start, QPoint &end, int speed)
 {
     // Obtenir la position actuelle du serveur
     QPoint currentPosition = server->getGraphicsItem()->pos().toPoint();
@@ -550,13 +551,11 @@ void MainWindow::moveServerInLoop(Server *server, QPoint &start, QPoint &end, in
 
         server->setPosition(newX, newY, 70.0); // Déplacer le serveur
     } else {
-        // Une fois que le serveur atteint la destination, inverser les points de départ et de fin
-        server->setPosition(end.x(), end.y(), 70.0);
-        QPoint temp = start;
-        start = end;
-        end = temp; // Inversion pour le retour
+        // Une fois que le serveur atteint la destination, aligner parfaitement la position
+        server->setPosition(end.x(), end.y(), 70.0); // Alignement exact sur la destination
     }
 }
+
 
 void MainWindow::onServeFoodButtonClicked()
 {
@@ -567,17 +566,19 @@ void MainWindow::onServeFoodButtonClicked()
         static int phase = 0; // Phase de déplacement : 0 = vers comptoir, 1 = vers table, 2 = retour initial
 
         if (phase == 0) {
-            moveServerInLoop(server1, serverStartPosition, serverCounterPosition, 10); // Déplacer vers le comptoir
+            moveServerOnce(server1, serverStartPosition, serverCounterPosition, 10); // Déplacer vers le comptoir
             if (server1->getGraphicsItem()->pos() == serverCounterPosition) {
                 phase = 1; // Passer à la phase suivante
             }
         } else if (phase == 1) {
-            moveServerInLoop(server1, serverCounterPosition, serverTablePosition, 10); // Déplacer vers la table
+            moveServerOnce(server1, serverCounterPosition, serverTablePosition, 10); // Déplacer vers la table
             if (server1->getGraphicsItem()->pos() == serverTablePosition) {
+
+
                 phase = 2; // Passer à la phase suivante
             }
         } else if (phase == 2) {
-            moveServerInLoop(server1, serverTablePosition, serverStartPosition, 10); // Retour à la position initiale
+            moveServerOnce(server1, serverTablePosition, serverStartPosition, 10); // Retour à la position initiale
             if (server1->getGraphicsItem()->pos() == serverStartPosition) {
                 timerServer->stop(); // Arrêter le mouvement
                 phase = 0; // Réinitialiser la phase pour la prochaine utilisation
@@ -588,6 +589,21 @@ void MainWindow::onServeFoodButtonClicked()
     timerServer->start(1000); // Mise à jour toutes les 100 ms
 }
 
+void MainWindow::onClearTableButtonClicked()
+{
+    qDebug() << "Bouton Débarrasser la table cliqué.";
+
+    // Supprimer l'assiette de la scène graphique
+    if (dish) {
+
+        delete dish; // Supprimer l'objet
+        dish = nullptr; // Réinitialiser le pointeur
+    }
+
+    qDebug() << "Assiette retirée de la table.";
+}
+
+
 
 void MainWindow::onTakeOrderButtonClicked()
 {
@@ -596,7 +612,7 @@ void MainWindow::onTakeOrderButtonClicked()
     // Démarrer le timer pour le RankChief
     timerRankChief = new QTimer(this);
     connect(timerRankChief, &QTimer::timeout, [this]() {
-        moveRankChiefInLoop(rankChief, rankChiefStartPosition, rankChiefEndPosition, 10);
+        moveRankChiefOnce(rankChief, rankChiefStartPosition, rankChiefEndPosition, 10);
     });
 
     timerRankChief->start(1000); // Mise à jour toutes les 100 ms
@@ -699,5 +715,3 @@ void MainWindow::onStopButtonClicked()
     rankChief2->setPosition(400, 150, 100.0);
 
 }
-
-
