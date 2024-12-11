@@ -1,3 +1,4 @@
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
@@ -640,7 +641,7 @@ void MainWindow::hideDiningRoomElements()
     client5->getGraphicsItem()->hide();
     client6->getGraphicsItem()->hide();
     client7->getGraphicsItem()->hide();
-     client8->getGraphicsItem()->hide();
+    client8->getGraphicsItem()->hide();
     client9->getGraphicsItem()->hide();
     client10->getGraphicsItem()->hide();
     client11->getGraphicsItem()->hide();
