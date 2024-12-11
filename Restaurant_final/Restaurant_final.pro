@@ -24,6 +24,7 @@ SOURCES += \
     cookercontroller.cpp \
     counter.cpp \
     countercontroller.cpp \
+    dashboard.cpp \
     dishcontroller.cpp \
     dishwasher.cpp \
     dishwashercontroller.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     cookercontroller.h \
     counter.h \
     countercontroller.h \
+    dashboard.h \
     dish.h \
     dishcontroller.h \
     dishwasher.h \
@@ -99,6 +101,7 @@ HEADERS += \
     washingmachinecontroller.h
 
 FORMS += \
+    dashboard.ui \
     mainwindow.ui
 
 

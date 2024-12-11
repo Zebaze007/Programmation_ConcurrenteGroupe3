@@ -1,4 +1,3 @@
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
@@ -679,9 +678,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete timer;
-    delete timerClient;
-    delete timerClient2;
-    delete timerClient3;
     delete timerRankChief;
     delete timerServer;
 
@@ -741,29 +737,6 @@ void MainWindow::onStartButtonClicked()
         timer->start(1000); // Update every 1 second
     }
 
-    // Resume client movement timers based on their previous states
-    if (isTimerClientActive && timerClient && !timerClient->isActive()) {
-        timerClient->start(5000);
-    }
-
-    if (isTimerClient2Active && timerClient2 && !timerClient2->isActive()) {
-        timerClient2->start(7000);
-    }
-
-    if (isTimerClient3Active && timerClient3 && !timerClient3->isActive()) {
-        timerClient3->start(8000);
-    }
-
-    // Resume RankChief and Server timers
-    if (isTimerRankChiefActive && timerRankChief && !timerRankChief->isActive()) {
-        timerRankChief->start(1000);
-    }
-
-    if (isTimerServerActive && timerServer && !timerServer->isActive()) {
-        timerServer->start(1000);
-    }
-
-    qDebug() << "Tous les mouvements reprennent.";
 }
 
 
@@ -773,40 +746,8 @@ void MainWindow::onPauseButtonClicked()
     qDebug() << "Bouton Pause cliqué.";
 
     // Vérifier et sauvegarder l'état des timers
-    if (timerClient && timerClient->isActive()) {
-        isTimerClientActive = true;
-        timerClient->stop();
-    } else {
-        isTimerClientActive = false;
-    }
 
-    if (timerClient2 && timerClient2->isActive()) {
-        isTimerClient2Active = true;
-        timerClient2->stop();
-    } else {
-        isTimerClient2Active = false;
-    }
 
-    if (timerClient3 && timerClient3->isActive()) {
-        isTimerClient3Active = true;
-        timerClient3->stop();
-    } else {
-        isTimerClient3Active = false;
-    }
-
-    if (timerRankChief && timerRankChief->isActive()) {
-        isTimerRankChiefActive = true;
-        timerRankChief->stop();
-    } else {
-        isTimerRankChiefActive = false;
-    }
-
-    if (timerServer && timerServer->isActive()) {
-        isTimerServerActive = true;
-        timerServer->stop();
-    } else {
-        isTimerServerActive = false;
-    }
 
     // Arrêter le timer principal
     timer->stop();
@@ -823,19 +764,7 @@ void MainWindow::onStopButtonClicked()
 
     // Arrête tous les timers
     if (timer) timer->stop();
-    if (timerClient) timerClient->stop();
-    if (timerClient2) timerClient2->stop();
-    if (timerClient3) timerClient3->stop();
-    if (timerRankChief) timerRankChief->stop();
-    if (timerServer) timerServer->stop();
 
-
-    // Réinitialise l'état des flags de retour
-    isReturningClient = false;
-    isReturningClient2 = false;
-    isReturningClient3 = false;
-    isReturningRankChief = false;
-    isReturningServer = false;
 
 
 
