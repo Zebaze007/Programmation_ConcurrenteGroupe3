@@ -23,6 +23,18 @@ MainWindow::MainWindow(QWidget *parent)
     , client10(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso1.png", 2, this))
     , client11(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso2.png", 3, this))
     , client12(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
+     , client13(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso3.png", 4, this))
+     , client14(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso4.png", 4, this))
+     , client15(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso5.png", 4, this))
+     , client16(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso7.png", 4, this))
+     , client17(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso8.png", 4, this))
+     , client18(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso10.png", 4, this))
+     , client19(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso3.png", 4, this))
+     , client20(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
+     , client21(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
+     , client22(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
+     , client23(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
+     , client24(new Client(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso9.png", 4, this))
     , table(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 1, this))
     , table2(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 2, this))
     , table5(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/table.png", 5, this))
@@ -107,6 +119,42 @@ MainWindow::MainWindow(QWidget *parent)
 
     sceneDiningArea->addItem(client12->getGraphicsItem());
     client12->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client13->getGraphicsItem());
+    client13->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client14->getGraphicsItem());
+    client14->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client15->getGraphicsItem());
+    client15->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client16->getGraphicsItem());
+    client16->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client17->getGraphicsItem());
+    client17->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client18->getGraphicsItem());
+    client18->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client19->getGraphicsItem());
+    client19->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client20->getGraphicsItem());
+    client20->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client21->getGraphicsItem());
+    client21->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client22->getGraphicsItem());
+    client22->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client23->getGraphicsItem());
+    client23->setPosition(280, 500, 100.0);
+
+    sceneDiningArea->addItem(client24->getGraphicsItem());
+    client24->setPosition(280, 500, 100.0);
 
     sceneDiningArea->addItem(server1->getGraphicsItem());
     server1->setPosition(100, 150, 70.0);

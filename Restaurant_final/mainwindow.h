@@ -90,6 +90,18 @@ private:
     Client *client10;
     Client *client11;
     Client *client12;
+    Client *client13;
+    Client *client14;
+    Client *client15;
+    Client *client16;
+    Client *client17;
+    Client *client18;
+    Client *client19;
+    Client *client20;
+    Client *client21;
+    Client *client22;
+    Client *client23;
+    Client *client24;
     Table *table;                      // Première table
     Table *table2;                     // Deuxième table
     Table *table5;
@@ -153,6 +165,27 @@ private:
     QPoint startPosition1, endPosition1;
     QPoint startPosition2, endPosition2;
     QPoint startPosition3, endPosition3;
+    QPoint startPosition4, endPosition4;
+    QPoint startPosition5, endPosition5;
+    QPoint startPosition6, endPosition6;
+    QPoint startPosition7, endPosition7;
+    QPoint startPosition8, endPosition8;
+    QPoint startPosition9, endPosition9;
+    QPoint startPosition10, endPosition10;
+    QPoint startPosition11, endPosition11;
+    QPoint startPosition12, endPosition12;
+    QPoint startPosition13, endPosition13;
+    QPoint startPosition14, endPosition14;
+    QPoint startPosition15, endPosition15;
+    QPoint startPosition16, endPosition16;
+    QPoint startPosition17, endPosition17;
+    QPoint startPosition18, endPosition18;
+    QPoint startPosition19, endPosition19;
+    QPoint startPosition20, endPosition20;
+    QPoint startPosition21, endPosition21;
+    QPoint startPosition22, endPosition22;
+    QPoint startPosition23, endPosition23;
+    QPoint startPosition24, endPosition24;
     QPoint rankChiefStartPosition;
     QPoint rankChiefEndPosition;
     QPoint serverStartPosition; // Position initiale

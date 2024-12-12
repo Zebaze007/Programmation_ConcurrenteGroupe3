@@ -1,4 +1,3 @@
-QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -108,7 +107,8 @@ FORMS += \
 RESOURCES += source_externe.qrc
 RESOURCES += ressources.qrc
 
-QT += core gui sql
+QT += core sql
+
 
 
 # Default rules for deployment.
