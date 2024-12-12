@@ -49,6 +49,7 @@ SOURCES += \
     stovecontroller.cpp \
     table.cpp \
     tablecontroller.cpp \
+    test_rankchief.cpp \
     washer.cpp \
     washingmachine.cpp \
     washingmachinecontroller.cpp
@@ -95,6 +96,7 @@ HEADERS += \
     stovecontroller.h \
     table.h \
     tablecontroller.h \
+    test_rankchief.h \
     washer.h \
     washingmachine.h \
     washingmachinecontroller.h
@@ -108,6 +110,7 @@ RESOURCES += source_externe.qrc
 RESOURCES += ressources.qrc
 
 QT += core sql
+QT += testlib
 
 
 
