@@ -121,34 +121,34 @@ MainWindow::MainWindow(QWidget *parent)
     client12->setPosition(280, 500, 100.0);
 
     sceneDiningArea->addItem(client13->getGraphicsItem());
-    client13->setPosition(280, 500, 100.0);
+    client13->setPosition(280, 200, 100.0);
 
     sceneDiningArea->addItem(client14->getGraphicsItem());
-    client14->setPosition(280, 500, 100.0);
+    client14->setPosition(320, 200, 100.0);
 
     sceneDiningArea->addItem(client15->getGraphicsItem());
-    client15->setPosition(280, 500, 100.0);
+    client15->setPosition(480, 200, 100.0);
 
     sceneDiningArea->addItem(client16->getGraphicsItem());
-    client16->setPosition(280, 500, 100.0);
+    client16->setPosition(520, 200, 100.0);
 
     sceneDiningArea->addItem(client17->getGraphicsItem());
-    client17->setPosition(280, 500, 100.0);
+    client17->setPosition(80, 25, 100.0);
 
     sceneDiningArea->addItem(client18->getGraphicsItem());
-    client18->setPosition(280, 500, 100.0);
+    client18->setPosition(120, 25, 100.0);
 
     sceneDiningArea->addItem(client19->getGraphicsItem());
-    client19->setPosition(280, 500, 100.0);
+    client19->setPosition(280, 25, 100.0);
 
     sceneDiningArea->addItem(client20->getGraphicsItem());
-    client20->setPosition(280, 500, 100.0);
+    client20->setPosition(320, 25, 100.0);
 
     sceneDiningArea->addItem(client21->getGraphicsItem());
-    client21->setPosition(280, 500, 100.0);
+    client21->setPosition(480, 25, 100.0);
 
     sceneDiningArea->addItem(client22->getGraphicsItem());
-    client22->setPosition(280, 500, 100.0);
+    client22->setPosition(520, 25, 100.0);
 
     sceneDiningArea->addItem(client23->getGraphicsItem());
     client23->setPosition(280, 500, 100.0);
