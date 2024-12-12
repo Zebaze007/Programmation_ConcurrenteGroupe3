@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dashboard.h"
 #include <QDebug>
 #include <QTimer>
 #include <QRandomGenerator>
@@ -70,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Configurez la scène pour la salle de restauration
     ui->diningAreaView->setScene(sceneDiningArea);
     sceneDiningArea->setSceneRect(0, 0, ui->diningAreaView->width(), ui->diningAreaView->height());
+
+
 
     // Ajoutez les objets à la salle de restauration
 
@@ -404,6 +407,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->clearTableButton, &QPushButton::clicked, this, &MainWindow::onClearTableButtonClicked);
     connect(ui->speedButton, &QPushButton::clicked, this, &MainWindow::onSpeedButtonClicked);
 
+    // Connecter le bouton "Dashboard" à une fonction pour ouvrir la fenêtre Dashboard
+    connect(ui->customerMoodButton, &QPushButton::clicked, this, &MainWindow::openDashboard);
+
+
 
 
     // Connectez le timer à la mise à jour du temps et des déplacements
@@ -436,6 +443,13 @@ MainWindow::MainWindow(QWidget *parent)
     dishPosition = QPoint(95, 100);
 
 
+}
+
+
+void MainWindow::openDashboard() {
+    // Créer et afficher la fenêtre Dashboard
+    Dashboard *dashboard = new Dashboard(this); // `this` comme parent pour gestion automatique de mémoire
+    dashboard->show();
 }
 
 void MainWindow::startClientMovement()

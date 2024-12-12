@@ -38,6 +38,7 @@
 #include "kitchenassistantcontroller.h"
 #include "kitchenassistant.h"
 #include "fridgecontroller.h"
+#include "dashboard.h"
 
 
 
@@ -66,6 +67,7 @@ private slots:
     void moveRankChiefOnce(RankChief *rankChief, QPoint &start, QPoint &end, int speed);
     void onClearTableButtonClicked();
     void onSpeedButtonClicked(); // Slot for the Accelerate button
+    void openDashboard(); // Fonction pour ouvrir le Dashboard
 
 
 private:

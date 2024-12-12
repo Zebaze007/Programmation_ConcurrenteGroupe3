@@ -106,6 +106,7 @@ FORMS += \
 
 
 RESOURCES += source_externe.qrc
+RESOURCES += ressources.qrc
 
 QT += core gui sql
 

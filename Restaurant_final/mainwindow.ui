@@ -45,7 +45,7 @@
          </property>
         </widget>
        </item>
-	   <item>
+       <item>
         <widget class="QPushButton" name="speedButton">
          <property name="text">
           <string>Accélérer</string>
@@ -148,16 +148,6 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="diningAreaLabel">
-            <property name="text">
-             <string>Salle de restauration</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QGraphicsView" name="diningAreaView">
             <property name="minimumSize">
              <size>
@@ -169,6 +159,16 @@
              <string notr="true">background-image: url(:/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Salle.jpg);
 image: url(:/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/perso6.jpg);
 </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="diningAreaLabel">
+            <property name="text">
+             <string>Salle de restauration</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
