@@ -1,0 +1,96 @@
+-- Script SQL pour créer les tables nécessaires dans SQLite
+
+-- 1. Table : Client
+CREATE TABLE Client (
+    ID_Client INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nom TEXT NOT NULL,
+    Type_Client TEXT,
+    Heure_Arrivee DATETIME,
+    Reservation BOOLEAN
+);
+
+-- 2. Table : Table_Restaurant
+CREATE TABLE Table_Restaurant (
+    ID_Table INTEGER PRIMARY KEY AUTOINCREMENT,
+    Capacite INTEGER NOT NULL,
+    Etat TEXT CHECK(Etat IN ('Libre', 'Occupée', 'En nettoyage'))
+);
+
+-- 3. Table : Commande
+CREATE TABLE Commande (
+    ID_Commande INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID_Client INTEGER NOT NULL,
+    Date_Commande DATETIME NOT NULL,
+    Etat TEXT CHECK(Etat IN ('En attente', 'En cours', 'Livrée', 'Annulée')),
+    FOREIGN KEY (ID_Client) REFERENCES Client(ID_Client)
+);
+
+-- 4. Table : Recette
+CREATE TABLE Recette (
+    ID_Recette INTEGER PRIMARY KEY AUTOINCREMENT,
+    categorie VARCHAR(50),
+    titre VARCHAR(100),
+    nb_personnes INT,
+    preparation VARCHAR(50),
+    cuisson VARCHAR(50),
+    repos VARCHAR(50),
+    ingredients TEXT,
+    description TEXT,
+    accompagnement VARCHAR(100)
+
+);
+
+-- 5. Table : Ingredient
+CREATE TABLE Ingredient (
+    ID_Ingredient INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nom TEXT NOT NULL,
+    Quantite_Stock INTEGER NOT NULL,
+    Seuil_Alerte INTEGER
+);
+
+-- 6. Table : Recette_Ingredient
+CREATE TABLE Recette_Ingredient (
+    ID_Recette INTEGER NOT NULL,
+    ID_Ingredient INTEGER NOT NULL,
+    Quantite_Utilisee INTEGER NOT NULL,
+    PRIMARY KEY (ID_Recette, ID_Ingredient),
+    FOREIGN KEY (ID_Recette) REFERENCES Recette(ID_Recette),
+    FOREIGN KEY (ID_Ingredient) REFERENCES Ingredient(ID_Ingredient)
+);
+
+-- 7. Table : Employe
+CREATE TABLE Employe (
+    ID_Employe INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nom TEXT NOT NULL,
+    Poste TEXT CHECK(Poste IN ('Serveur', 'Chef de Rang', 'Commis')),
+    ID_Table INTEGER,
+    FOREIGN KEY (ID_Table) REFERENCES Table_Restaurant(ID_Table)
+);
+
+-- 8. Table : Materiel
+CREATE TABLE Materiel (
+    ID_Materiel INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nom TEXT NOT NULL,
+    Quantite_Totale INTEGER NOT NULL,
+    Quantite_Disponible INTEGER
+);
+
+-- 9. Table : Tache
+CREATE TABLE Tache (
+    ID_Tache INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID_Employe INTEGER NOT NULL,
+    Description TEXT NOT NULL,
+    Etat TEXT CHECK(Etat IN ('En attente', 'En cours', 'Terminée')),
+    Debut DATETIME,
+    Fin DATETIME,
+    FOREIGN KEY (ID_Employe) REFERENCES Employe(ID_Employe)
+);
+
+-- 10. Table : Stock
+CREATE TABLE Stock (
+    ID_Stock INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID_Ingredient INTEGER NOT NULL,
+    Type_Stockage TEXT CHECK(Type_Stockage IN ('Réserve', 'Congélateur', 'Chambre froide')),
+    Quantite INTEGER NOT NULL,
+    FOREIGN KEY (ID_Ingredient) REFERENCES Ingredient(ID_Ingredient)
+);

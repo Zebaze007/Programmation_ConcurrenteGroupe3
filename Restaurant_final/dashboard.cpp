@@ -1,6 +1,5 @@
 #include "dashboard.h"
-#include <QStandardItemModel>
-#include <QWidget>
+#include <QDate>
 
 Dashboard::Dashboard(QWidget *parent)
     : QMainWindow(parent) {
@@ -49,6 +48,26 @@ void Dashboard::setupUI() {
 
     mainLayout->addWidget(utensilsGroup);
 
+    // Section : Alertes
+    QGroupBox *alertGroup = new QGroupBox("Alertes", centralWidget);
+    QVBoxLayout *alertLayout = new QVBoxLayout(alertGroup);
+
+    alertList = new QListWidget(alertGroup);
+    alertList->setStyleSheet("font-size: 16px; color: red;");
+    alertLayout->addWidget(alertList);
+
+    mainLayout->addWidget(alertGroup);
+
+    // Section : Menu du Jour
+    QGroupBox *menuGroup = new QGroupBox("Menu du Jour", centralWidget);
+    QVBoxLayout *menuLayout = new QVBoxLayout(menuGroup);
+
+    menuLabel = new QLabel("Chargement du menu...", menuGroup);
+    menuLabel->setStyleSheet("font-size: 18px; color: #333;");
+    menuLayout->addWidget(menuLabel);
+
+    mainLayout->addWidget(menuGroup);
+
     // Définir le widget central
     setCentralWidget(centralWidget);
 }
@@ -61,9 +80,9 @@ void Dashboard::setupFakeData() {
     // Ajouter des données fictives aux stocks
     QStandardItemModel *stockModel = new QStandardItemModel(this);
     stockModel->setHorizontalHeaderLabels({"Ingrédient", "Quantité"});
-    stockModel->appendRow({new QStandardItem("Tomates"), new QStandardItem("50 kg")});
+    stockModel->appendRow({new QStandardItem("Tomates"), new QStandardItem("5 kg")});
     stockModel->appendRow({new QStandardItem("Poulet"), new QStandardItem("30 kg")});
-    stockModel->appendRow({new QStandardItem("Farine"), new QStandardItem("20 kg")});
+    stockModel->appendRow({new QStandardItem("Farine"), new QStandardItem("2 kg")});
     tableViewStock->setModel(stockModel);
 
     // Ajouter des données fictives aux ustensiles
@@ -73,4 +92,42 @@ void Dashboard::setupFakeData() {
     utensilsModel->appendRow({new QStandardItem("Couverts"), new QStandardItem("100")});
     utensilsModel->appendRow({new QStandardItem("Verres"), new QStandardItem("80")});
     tableViewUstensiles->setModel(utensilsModel);
+
+    // Mettre à jour les alertes et le menu
+    updateAlerts();
+    updateMenu();
+}
+
+void Dashboard::updateAlerts() {
+    // Exemple d'alertes basées sur les stocks
+    alertList->clear();
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(tableViewStock->model());
+    if (model) {
+        for (int row = 0; row < model->rowCount(); ++row) {
+            QString ingredient = model->item(row, 0)->text();
+            QString quantity = model->item(row, 1)->text();
+            int value = quantity.split(" ")[0].toInt(); // Extraire le nombre
+
+            if (value < 10) { // Seuil d'alerte
+                alertList->addItem(ingredient + " est en quantité faible (" + quantity + ")");
+            }
+        }
+    }
+}
+
+void Dashboard::updateMenu() {
+    // Exemple de menu du jour basé sur le jour actuel
+    QDate today = QDate::currentDate();
+    QString dayOfWeek = today.toString("dddd");
+
+    QString menu;
+    if (dayOfWeek == "Monday") {
+        menu = "Plat : Poulet rôti\nDessert : Tarte aux pommes";
+    } else if (dayOfWeek == "Tuesday") {
+        menu = "Plat : Poisson grillé\nDessert : Crème brûlée";
+    } else {
+        menu = "Plat : Spécialité du chef\nDessert : Fruits frais";
+    }
+
+    menuLabel->setText(menu);
 }
