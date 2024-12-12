@@ -151,10 +151,10 @@ MainWindow::MainWindow(QWidget *parent)
     client22->setPosition(520, 25, 100.0);
 
     sceneDiningArea->addItem(client23->getGraphicsItem());
-    client23->setPosition(280, 500, 100.0);
+    client23->setPosition(100, 535, 100.0);
 
     sceneDiningArea->addItem(client24->getGraphicsItem());
-    client24->setPosition(280, 500, 100.0);
+    client24->setPosition(100, 480, 100.0);
 
     sceneDiningArea->addItem(server1->getGraphicsItem());
     server1->setPosition(100, 150, 70.0);
