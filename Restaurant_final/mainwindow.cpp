@@ -745,9 +745,6 @@ void MainWindow::onPauseButtonClicked()
 {
     qDebug() << "Bouton Pause cliqué.";
 
-    // Vérifier et sauvegarder l'état des timers
-
-
 
     // Arrêter le timer principal
     timer->stop();

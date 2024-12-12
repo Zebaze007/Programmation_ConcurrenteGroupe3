@@ -185,7 +185,7 @@ private:
 
 
     void startClientMovement();  // Démarrer le mouvement des clients
-    void moveClientWithReturn(Client *client, QPoint &start, QPoint &end, int speed);
+
 
     // Méthode pour déplacer un client entre deux points
     void moveClientOnce(Client *client, const QPoint &start, const QPoint &end, int speed);
