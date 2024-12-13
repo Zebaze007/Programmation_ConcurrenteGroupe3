@@ -10,7 +10,7 @@
 //Fonction pour connecter la base de données
 bool connectToDatabase()
 {  QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbPath = "C:/Users/rosil/OneDrive/Documents/ECOLE/X3/Semestre 1/Programmation concurrente/Programmation_ConcurrenteGroupe3/Restaurant_final/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/restaurant.db";
+    QString dbPath = "C:\\Users\\Y-G\\Documents\\Projet programmation concurrente\\Restaurant_final\\build\\Desktop_Qt_6_8_0_MinGW_64_bit-Debug\\restaurant.sqlite";
 
     QFile file(dbPath);
     if (!file.exists()) {
@@ -49,5 +49,8 @@ int main(int argc, char *argv[])
     qDebug() << "Fenêtre principale affichée.";
 
     return a.exec();
+
+
+
 }
 
