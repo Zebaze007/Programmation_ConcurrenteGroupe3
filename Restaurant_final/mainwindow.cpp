@@ -52,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     , table13(new Table(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/tableP.png", 13, this))
     , counter(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 1, this))
     , counter2(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 2, this))
+    , counter3(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 2, this))
+    , counter4(new Counter(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/comptoircomplet.png", 2, this))
     , washingMachine(new WashingMachine(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavelinge.png", 1, this))
     , dishwasher(new Dishwasher(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/lavevaissel.png", 1, this)) // Crée le lave-vaisselle
     , stove(new Stove(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/Four.png", 1, this))
@@ -59,6 +61,9 @@ MainWindow::MainWindow(QWidget *parent)
     , cookChief(new CookChief(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/chef de cuisine.png", 1, this))
     , cooker(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
     , cooker2(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
+     , cooker3(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 1, this))
+     , cooker4(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 1, this))
+     , cooker5(new Cooker(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plate.png", 1, this))
     , assistant(new KitchenAssistant(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
     , assistant2(new KitchenAssistant(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/cuisto.png", 1, this))
     , server1(new Server(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/serveur.png", 1, this))
@@ -68,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
     , roomclerk(new RoomClerk(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/commis.png", 4, this))
     , dish(new Dish(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plate.png", 4, this))
     , dish2(new Dish(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plate.png", 4, this))
+    , dish3(new Dish(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plate.png", 4, this))
     , butler(new Butler(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/maitre.png", 4, this))
     , washer(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
     , washer2(new Washer(":/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/debug/images/plongeuse.png", 4, this))
@@ -438,13 +444,29 @@ MainWindow::MainWindow(QWidget *parent)
     sceneKitchenArea->addItem(cooker2->getGraphicsItem());
     cooker2->setPosition(510, 450, 100.0);
 
-    sceneKitchenArea->addItem(assistant->getGraphicsItem());
-    assistant->setPosition(480, 400, 100.0);
+    //sceneKitchenArea->addItem(assistant->getGraphicsItem());
+    //assistant->setPosition(480, 400, 100.0);
 
-    sceneKitchenArea->addItem(assistant2->getGraphicsItem());
-    assistant2->setPosition(480, 450, 100.0);
+    //sceneKitchenArea->addItem(assistant2->getGraphicsItem());
+    //assistant2->setPosition(480, 450, 100.0);
 
+    sceneKitchenArea->addItem(counter3->getGraphicsItem());
+    counter3->setPosition(60, 46, 100.0);
 
+    sceneKitchenArea->addItem(counter4->getGraphicsItem());
+    counter4->setPosition(350, 46, 100.0);
+
+    //sceneKitchenArea->addItem(dish2->getGraphicsItem());
+    //dish3->setPosition(60, 35, 50.0);
+
+    sceneKitchenArea->addItem(cooker5->getGraphicsItem());
+    cooker5->setPosition(60, 35, 50.0);
+
+    sceneKitchenArea->addItem(cooker3->getGraphicsItem());
+    cooker3->setPosition(480, 400, 100.0);
+
+    sceneKitchenArea->addItem(cooker4->getGraphicsItem());
+    cooker4->setPosition(480, 450, 100.0);
 
     // Connectez les boutons aux slots
     connect(ui->stratButton, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
@@ -480,6 +502,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     rankChiefStartPosition = QPoint(400, 400);
     rankChiefEndPosition= QPoint(150, 520);
+
+    startPositionWasher = QPoint(525, 500);
+    endPositionWasher = QPoint(100, 40);
+
+    startPositionCooker = QPoint(510, 400);
+    endPositionCooker = QPoint(70, 300);
+
+    startPositionCooker2 = QPoint(510, 440);
+    endPositionCooker2 = QPoint(70, 300);
+
+    startPositionCooker3 = QPoint(400, 400);
+    endPositionCooker3 = QPoint(390, 46);
+
+    startPositionCooker4 = QPoint(400, 450);
+    endPositionCooker4 = QPoint(330, 41);
+
+    startPositionDish = QPoint(60, 35);
+    endPositionDish = QPoint(0, 0);
 
 
     // Positions du serveur
@@ -540,6 +580,99 @@ void MainWindow::startClientMovement()
     qDebug() << "Mouvement des clients initialisé à partir de 10:00 AM.";
 }
 
+void MainWindow::startWasherMovement()
+{
+    qDebug() << "Mouvement des clients démarré.";
+
+    // Démarre les timers pour animer les déplacements des clients
+    timerWasher = new QTimer(this);
+    connect(timerWasher, &QTimer::timeout, [this]() {
+        isReturningWasher = true;
+        moveWasherInLoop(washer, endPositionWasher, startPositionWasher, 15); // Retour au point de départ
+    });
+
+
+
+    // Initialiser le mouvement des clients
+    timerWasher->start(500);  // Délai avant le retour pour client 1
+
+}
+
+void MainWindow::startCookerMovement()
+{
+    qDebug() << "Mouvement des clients démarré.";
+
+    // Démarre les timers pour animer les déplacements des clients
+    timerCooker = new QTimer(this);
+    connect(timerCooker, &QTimer::timeout, [this]() {
+        isReturningCooker = true;
+        moveCookerInLoop(cooker, endPositionCooker, startPositionCooker, 15); // Retour au point de départ
+    });
+
+
+
+    // Initialiser le mouvement des clients
+    timerCooker->start(500);  // Délai avant le retour pour client 1
+
+}
+
+void MainWindow::startCooker2Movement()
+{
+    qDebug() << "Mouvement des clients démarré.";
+
+    // Démarre les timers pour animer les déplacements des clients
+    timerCooker2 = new QTimer(this);
+    connect(timerCooker2, &QTimer::timeout, [this]() {
+        isReturningCooker = true;
+        moveCookerInLoop(cooker2, endPositionCooker2, startPositionCooker2, 15); // Retour au point de départ
+    });
+
+
+
+    // Initialiser le mouvement des clients
+    timerCooker2->start(500);  // Délai avant le retour pour client 1
+
+}
+
+void MainWindow::startCooker3Movement()
+{
+    qDebug() << "Mouvement des clients démarré.";
+
+    // Démarre les timers pour animer les déplacements des clients
+    timerCooker3 = new QTimer(this);
+    connect(timerCooker3, &QTimer::timeout, [this]() {
+        isReturningCooker3 = true;
+        moveCookerInLoop(cooker3, endPositionCooker3, startPositionCooker3, 15); // Retour au point de départ
+    });
+
+
+
+    // Initialiser le mouvement des clients
+    timerCooker3->start(500);  // Délai avant le retour pour client 1
+
+}
+
+
+void MainWindow::startCooker4Movement()
+{
+    qDebug() << "Mouvement des clients démarré.";
+
+    // Démarre les timers pour animer les déplacements des clients
+    timerCooker4 = new QTimer(this);
+    connect(timerCooker4, &QTimer::timeout, [this]() {
+        isReturningCooker4 = true;
+        moveCookerInLoop(cooker4, endPositionCooker4, startPositionCooker4, 15); // Retour au point de départ
+    });
+
+
+
+    // Initialiser le mouvement des clients
+    timerCooker4->start(500);  // Délai avant le retour pour client 1
+
+}
+
+
+
 
 
 void MainWindow::moveClients()
@@ -578,6 +711,42 @@ void MainWindow::moveClientOnce(Client *client, QPoint &start, QPoint &end, int 
         client->setPosition(end.x(), end.y(), 100.0);
     }
 }
+
+void MainWindow::moveWasher()
+{
+    // Déplacer chaque client d'un point à l'autre
+    moveWasherInLoop(washer, startPositionWasher, endPositionWasher, 150);
+
+}
+
+void MainWindow::moveCooker()
+{
+    // Déplacer chaque client d'un point à l'autre
+    moveCookerInLoop(cooker, startPositionCooker, endPositionCooker, 150);
+
+}
+
+void MainWindow::moveCooker2()
+{
+    // Déplacer chaque client d'un point à l'autre
+    moveCooker2InLoop(cooker2, startPositionCooker2, endPositionCooker2, 150);
+
+}
+
+void MainWindow::moveCooker3()
+{
+    // Déplacer chaque client d'un point à l'autre
+    moveCooker3InLoop(cooker3, startPositionCooker3, endPositionCooker3, 150);
+
+}
+
+void MainWindow::moveCooker4()
+{
+    // Déplacer chaque client d'un point à l'autre
+    moveCooker4InLoop(cooker4, startPositionCooker4, endPositionCooker4, 150);
+
+}
+
 
 
 void MainWindow::moveRankChiefOnce(RankChief *rankChief, QPoint &start, QPoint &end, int speed)
@@ -630,6 +799,154 @@ void MainWindow::moveServerOnce(Server *server, QPoint &start, QPoint &end, int 
         server->setPosition(end.x(), end.y(), 70.0); // Alignement exact sur la destination
     }
 }
+
+void MainWindow::moveWasherInLoop(Washer *washer, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = washer->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        washer->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        washer->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+
+
+void MainWindow::moveCookerInLoop(Cooker *cooker, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = cooker->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        cooker->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        cooker->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+void MainWindow::moveCooker2InLoop(Cooker *cooker2, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = cooker2->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        cooker2->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        cooker2->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+
+void MainWindow::moveCooker3InLoop(Cooker *cooker3, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = cooker3->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        cooker3->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        cooker3->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+
+void MainWindow::moveCooker4InLoop(Cooker *cooker4, QPoint &start, QPoint &end, int speed)
+{
+    // Obtenir la position actuelle du client
+    QPoint currentPosition = cooker4->getGraphicsItem()->pos().toPoint();
+
+    // Calculer la direction du mouvement
+    int deltaX = end.x() - currentPosition.x();
+    int deltaY = end.y() - currentPosition.y();
+
+    // Si le client n'a pas encore atteint la position finale, le déplacer progressivement
+    if (abs(deltaX) > speed || abs(deltaY) > speed) {
+        int stepX = (deltaX > 0) ? speed : (deltaX < 0) ? -speed : 0;
+        int stepY = (deltaY > 0) ? speed : (deltaY < 0) ? -speed : 0;
+
+        // Déplacer le client par un "pas" de la distance à chaque mise à jour
+        int newX = currentPosition.x() + stepX;
+        int newY = currentPosition.y() + stepY;
+
+        cooker4->setPosition(newX, newY, 100.0);
+    } else {
+        // Une fois que le client atteint la destination, inverser les points de départ et de fin
+        cooker4->setPosition(end.x(), end.y(), 100.0); // Alignement parfait sur la position finale
+        QPoint temp = start;
+        start = end;
+        end = temp; // Inversion pour le retour
+    }
+}
+
+
+
+
 
 
 void MainWindow::onServeFoodButtonClicked()
@@ -798,6 +1115,13 @@ void MainWindow::onStartButtonClicked()
     if (!timer->isActive()) {
         timer->start(1000); // Update every 1 second
     }
+
+    startCookerMovement();
+    startCooker2Movement();
+    startCooker3Movement();
+    startCooker4Movement();
+    startWasherMovement();
+
 
 }
 

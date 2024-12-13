@@ -68,6 +68,25 @@ private slots:
     void onClearTableButtonClicked();
     void onSpeedButtonClicked(); // Slot for the Accelerate button
     void openDashboard(); // Fonction pour ouvrir le Dashboard
+    void moveKitchenAssistants();
+    void moveWasher();
+    void moveCooker();
+    void moveCooker2();
+    void moveCooker3();
+    void moveCooker4();
+    void moveCooker5();
+    void moveDish();
+    void moveKitchenAssistant();
+    void moveKitchenAssistant2();
+    void moveWasherInLoop(Washer *washer, QPoint &start, QPoint &end, int speed);
+    void moveCookerInLoop(Cooker *cooker, QPoint &start, QPoint &end, int speed);
+    void moveCooker2InLoop(Cooker *cooker2, QPoint &start, QPoint &end, int speed);
+    void moveCooker3InLoop(Cooker *cooker3, QPoint &start, QPoint &end, int speed);
+    void moveCooker4InLoop(Cooker *cooker4, QPoint &start, QPoint &end, int speed);
+    void moveCooker5InLoop(Cooker *cooker5, QPoint &start, QPoint &end, int speed);
+    void moveRankChiefInLoop(QPoint &start, QPoint &end, int speed);
+    void moveDishInLoop(QPoint &start, QPoint &end, int speed);
+
 
 
 private:
@@ -126,6 +145,7 @@ private:
     RoomClerk *roomclerk;
     Dish *dish;
     Dish *dish2;
+    Dish *dish3;
     Butler *butler;
     RankChief *rankChief;
     RankChief *rankChief2;
@@ -135,6 +155,8 @@ private:
     // Objets dans la cuisine
     Counter *counter;                  // Comptoir
     Counter *counter2;
+    Counter *counter3;
+    Counter *counter4;
     WashingMachine *washingMachine;    // Lave-linge
     Dishwasher *dishwasher;            // Lave-vaisselle
     Stove *stove;                      // four
@@ -142,6 +164,9 @@ private:
     CookChief *cookChief;              //chef cuisto
     Cooker *cooker;                    //chefs de partie
     Cooker *cooker2;
+    Cooker *cooker3;
+    Cooker *cooker4;
+    Cooker *cooker5;
     Washer *washer;
     Washer *washer2;
     QVector<Chair*> chairs;            //chaises
@@ -193,6 +218,24 @@ private:
     QPoint serverTablePosition; // Position de la table
     QPoint serverEndPosition;
     QPoint dishPosition;
+    QPoint startPositionWasher;
+    QPoint endPositionWasher;
+    QPoint startPositionCooker;
+    QPoint endPositionCooker;
+    QPoint startPositionCooker2;
+    QPoint endPositionCooker2;
+    QPoint startPositionCooker3;
+    QPoint endPositionCooker3;
+    QPoint startPositionCooker4;
+    QPoint endPositionCooker4;
+    QPoint startPositionCooker5;
+    QPoint endPositionCooker5;
+    QPoint startPositionKitchenAssistant;
+    QPoint endPositionKitchenAssistant;
+    QPoint startPositionKitchenAssistant2;
+    QPoint endPositionKitchenAssistant2;
+    QPoint startPositionDish;
+    QPoint endPositionDish;
 
 
     // Timers pour chaque client
@@ -201,6 +244,15 @@ private:
     QTimer *timerClient3;
     QTimer *timerRankChief;
     QTimer *timerServer;
+    QTimer *timerWasher;
+    QTimer *timerCooker;
+    QTimer *timerCooker2;
+    QTimer *timerCooker3;
+    QTimer *timerCooker4;
+    QTimer *timerCooker5;
+    QTimer *timerKitchenAssistant;
+    QTimer *timerKitchenAssistant2;
+    QTimer *timerDish;
 
 
 
@@ -215,11 +267,29 @@ private:
     bool isTimerClient3Active = false;
     bool isTimerRankChiefActive = false;
     bool isTimerServerActive = false;
+    bool isReturningWasher = false;
+    bool isReturningCooker = false;
+    bool isReturningCooker2 = false;
+    bool isReturningCooker3 = false;
+    bool isReturningCooker4 = false;
+    bool isReturningCooker5 = false;
+    bool isReturningKitchenAssistant = false;
+    bool isReturningKitchenAssistant2 = false;
+    bool isReturningDish = false;
 
 
 
 
     void startClientMovement();  // Démarrer le mouvement des clients
+    void startWasherMovement();
+    void startCookerMovement();
+    void startCooker2Movement();
+    void startCooker3Movement();
+    void startCooker4Movement();
+    void startCooker5Movement();
+    void startDishMovement();
+    void startKitchenAssistantMovement();
+    void startKitchenAssistant2Movement();
 
 
     // Méthode pour déplacer un client entre deux points
@@ -228,6 +298,35 @@ private:
     void moveServerOnce(Server *server, QPoint &start, QPoint &end, int speed);
     void hideDiningRoomElements(); // Hides all clients and staff in the dining room
     void showDiningRoomElements(); // Shows all clients and staff in the dining room
+
+    // Méthode pour déplacer un washer entre deux points
+    void moveWasherInLoop(Washer *washer, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un cooker entre deux points
+    void moveCookerInLoop(Cooker *cooker, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un cooker2 entre deux points
+    void moveCooker2InLoop(Cooker *cooker2, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un cooker entre deux points
+    void moveCooker3InLoop(Cooker *cooker3, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un cooker2 entre deux points
+    void moveCooker4InLoop(Cooker *cooker4, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un cooker2 entre deux points
+    void moveCooker5InLoop(Cooker *cooker5, const QPoint &start, const QPoint &end, int speed);
+
+
+
+    // Méthode pour déplacer un assistant entre deux points
+    void moveKitchenAssistantInLoop(KitchenAssistant *assistant, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un assistant entre deux points
+    void moveKitchenAssistant2InLoop(KitchenAssistant *assistant2, const QPoint &start, const QPoint &end, int speed);
+
+    // Méthode pour déplacer un assistant entre deux points
+    void moveDishInLoop(Dish *dish3, const QPoint &start, const QPoint &end, int speed);
 
 };
 
