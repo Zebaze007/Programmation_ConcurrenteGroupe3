@@ -1024,6 +1024,18 @@ void MainWindow::hideDiningRoomElements()
     client10->getGraphicsItem()->hide();
     client11->getGraphicsItem()->hide();
     client12->getGraphicsItem()->hide();
+    client13->getGraphicsItem()->hide();
+    client14->getGraphicsItem()->hide();
+    client15->getGraphicsItem()->hide();
+    client16->getGraphicsItem()->hide();
+    client17->getGraphicsItem()->hide();
+    client18->getGraphicsItem()->hide();
+    client19->getGraphicsItem()->hide();
+    client20->getGraphicsItem()->hide();
+    client21->getGraphicsItem()->hide();
+    client22->getGraphicsItem()->hide();
+    client23->getGraphicsItem()->hide();
+    client24->getGraphicsItem()->hide();
     dish->getGraphicsItem()->hide();
     dish2->getGraphicsItem()->hide();
 
@@ -1045,6 +1057,18 @@ void MainWindow::showDiningRoomElements()
     client10->getGraphicsItem()->show();
     client11->getGraphicsItem()->show();
     client12->getGraphicsItem()->show();
+    client13->getGraphicsItem()->show();
+    client14->getGraphicsItem()->show();
+    client15->getGraphicsItem()->show();
+    client16->getGraphicsItem()->show();
+    client17->getGraphicsItem()->show();
+    client18->getGraphicsItem()->show();
+    client19->getGraphicsItem()->show();
+    client20->getGraphicsItem()->show();
+    client21->getGraphicsItem()->show();
+    client22->getGraphicsItem()->show();
+    client23->getGraphicsItem()->show();
+    client24->getGraphicsItem()->show();
     dish->getGraphicsItem()->show();
     dish2->getGraphicsItem()->show();
 

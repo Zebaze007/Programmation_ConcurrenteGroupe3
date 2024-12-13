@@ -6,6 +6,13 @@ Cooker::Cooker(const QString &imagePath, int id, QObject *parent)
     graphicsItem->setZValue(1); // Permet de gérer la superposition des sprites
 }
 
+// Constructeur par défaut pour les tests unitaires
+Cooker::Cooker(QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem()), id(0) // Valeurs par défaut
+{
+    graphicsItem->setZValue(1);
+}
+
 Cooker::~Cooker()
 {
     delete graphicsItem;

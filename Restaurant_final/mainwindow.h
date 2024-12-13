@@ -55,7 +55,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+public:
+    void moveDishInLoop(Dish *dish3, const QPoint &start, const QPoint &end, int speed); // Public
+
+
+public slots:
     void onStartButtonClicked();       // Bouton Démarrer
     void onPauseButtonClicked();       // Bouton Pause
     void onStopButtonClicked();        // Bouton Stopper
@@ -279,7 +283,6 @@ private:
 
 
 
-
     void startClientMovement();  // Démarrer le mouvement des clients
     void startWasherMovement();
     void startCookerMovement();
@@ -325,8 +328,7 @@ private:
     // Méthode pour déplacer un assistant entre deux points
     void moveKitchenAssistant2InLoop(KitchenAssistant *assistant2, const QPoint &start, const QPoint &end, int speed);
 
-    // Méthode pour déplacer un assistant entre deux points
-    void moveDishInLoop(Dish *dish3, const QPoint &start, const QPoint &end, int speed);
+
 
 };
 

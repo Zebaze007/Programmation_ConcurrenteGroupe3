@@ -4,7 +4,14 @@
 #include <QFont>
 
 Client::Client(const QString &imagePath, int id, QObject *parent)
-    : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id), orderPopup(nullptr), imagePath(imagePath)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id), orderPopup(nullptr), imagePath(imagePath), currentCommand(nullptr)
+{
+    graphicsItem->setZValue(1);
+}
+
+// Constructeur par défaut pour les tests unitaires
+Client::Client(QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem()), id(0), orderPopup(nullptr), imagePath(""), currentCommand(nullptr)
 {
     graphicsItem->setZValue(1);
 }
@@ -14,6 +21,9 @@ Client::~Client()
     delete graphicsItem;
     if (orderPopup) {
         delete orderPopup;
+    }
+    if (currentCommand) {
+        delete currentCommand;
     }
 }
 
@@ -25,11 +35,6 @@ void Client::setPosition(int x, int y, double scale)
     }
 }
 
-void Client::orderDish(const QString &dish)
-{
-    Q_UNUSED(dish);
-}
-
 QGraphicsPixmapItem* Client::getGraphicsItem() const
 {
     return graphicsItem;
@@ -38,6 +43,19 @@ QGraphicsPixmapItem* Client::getGraphicsItem() const
 int Client::getId() const
 {
     return id;
+}
+
+void Client::setCommand(Command *command)
+{
+    if (currentCommand) {
+        delete currentCommand; // Supprimer l'ancienne commande, s'il y en a une
+    }
+    currentCommand = command;
+}
+
+Command* Client::getCommand() const
+{
+    return currentCommand;
 }
 
 void Client::showOrderPopup(const QString &message, QGraphicsScene *scene)
@@ -67,5 +85,3 @@ void Client::setImagePath(const QString &path)
         graphicsItem->setPixmap(pixmap);
     }
 }
-
-

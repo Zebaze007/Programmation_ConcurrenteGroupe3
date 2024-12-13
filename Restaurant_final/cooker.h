@@ -8,7 +8,12 @@ class Cooker : public QObject {
     Q_OBJECT
 
 public:
+    // Constructeur normal avec paramètres
     Cooker(const QString &imagePath, int id, QObject *parent = nullptr);
+
+    // Constructeur par défaut pour les tests unitaires
+    Cooker(QObject *parent = nullptr);
+
     ~Cooker();
 
     void setPosition(int x, int y, double scale);

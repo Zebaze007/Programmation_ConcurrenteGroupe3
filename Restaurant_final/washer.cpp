@@ -1,5 +1,4 @@
 #include "washer.h"
-
 #include <iostream>
 
 void Washer::fillDishwasher() {
@@ -22,6 +21,13 @@ Washer::Washer(const QString &imagePath, int id, QObject *parent)
     : QObject(parent), graphicsItem(new QGraphicsPixmapItem(QPixmap(imagePath))), id(id)
 {
     graphicsItem->setZValue(1); // Permet de gérer la superposition
+}
+
+// Constructeur par défaut pour les tests unitaires
+Washer::Washer(QObject *parent)
+    : QObject(parent), graphicsItem(new QGraphicsPixmapItem()), id(0) // Valeurs par défaut
+{
+    graphicsItem->setZValue(1);
 }
 
 Washer::~Washer()
